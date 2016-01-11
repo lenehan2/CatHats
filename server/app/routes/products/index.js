@@ -40,6 +40,13 @@ router.delete('/:id', function (req, res, next) {
         .then(null, next);
 });
 
-
+router.put('/:id', function (req, res, next) {
+    Object.keys(req.body).forEach(function (key) {
+        req.product[key] = req.body[key];
+    });
+    req.product.save()
+        .then(product => res.json(product))
+        .then(null, next);
+});
 
 module.exports = router;
