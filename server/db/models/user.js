@@ -4,11 +4,26 @@ var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     email: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    cart: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Order'
+    },
+    orders: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Order'
+    }
     salt: {
         type: String
     },
