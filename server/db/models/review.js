@@ -7,10 +7,10 @@ var schema = new mongoose.Schema({
 		min: 1,
 		max: 5
 	},
-	products: [{
+	product: {
 		type: mongoose.Schema.Types.ObjectId, 
 		ref: 'Product'
-	}],
+	},
 	title: {
 		type: String,
 		required: true

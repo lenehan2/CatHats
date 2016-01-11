@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var categories = [];
+var categories = ['Seasonal','Costumes','Formal','Outerware'];
 
 var schema = new mongoose.Schema({
 	title: {
@@ -24,9 +24,9 @@ var schema = new mongoose.Schema({
 		type: Number,
 		min: 0
 	},
-	imageUrls: [{
+	imageUrl: {
 		type: String
-	}],
+	},
 	reviews: [{
 		type: mongoose.Schema.Types.ObjectId, 
 		ref: 'Review'
