@@ -68,7 +68,7 @@ var seedProducts = function() {
         title: "Star Wars Yoda Cat Headpiece",
         price: 499,
         description: "These STAR WARS Yoda ears come with an adjustable velcro band that fits comfortably around your cat's head. The ears feature great details including Yoda's characteristic fuzzy white hair.",
-        category: ["Costume"],
+        category: ["Costumes"],
         inventory: 100,
         imageUrl: "http://mousebreath.com/wp-content/uploads/2013/08/mao-yoda-petco.jpg"
 
