@@ -21,4 +21,8 @@ var schema = new mongoose.Schema({
 	}
 });
 
+schema.methods.addProduct = function(productId){
+	this.products.push(productId);
+}
+
 mongoose.model('Order', schema);
