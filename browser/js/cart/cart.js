@@ -15,5 +15,11 @@ app.controller('cartCtrl', function($scope, cart, CartFactory) {
     $scope.cart = cart;
 
     $scope.updateCart = CartFactory.updateCart;
+    $scope.removeItem = function(productId,cart){
+
+    	CartFactory.removeItem(productId,cart)
+    	.then(cart => $scope.cart=cart)
+    	
+    }
 
 })
