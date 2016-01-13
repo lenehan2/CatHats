@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-
+var _ = require('lodash');
 
 router.param('id',function(req,res,next,id){
 	User.findById(id).exec()
@@ -26,6 +26,29 @@ router.get('/',function(req,res,next){
 
 router.get('/:id',function(req,res,next){
 	res.status(200).json(req.user);
-})
+});
+
+router.get('/:id/orders',function(req,res,next){
+	res.status(200).json(req.user.orders);
+});
+
+//UPDATE USER ACCOUNT
+router.put('/:id', function(req,res,next){
+	if(!req.user){
+        res.status(403).end();  //NOT SURE IF WORKS!
+    }
+    Object.keys(req.body).forEach(function(key){
+    	req.user[key] = req.body[key];
+    });
+    req.user.save()
+    .then(user => res.json(user))
+    .then(null, next);
+});
+
+router.post('/createAccount', function(req,res,next){
+	User.create(req.body)
+	.then(user => res.json(user))
+	.then(null, next);
+});
 
 module.exports = router
