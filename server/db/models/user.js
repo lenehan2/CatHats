@@ -3,6 +3,7 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var _ = require('lodash');
 var Order = mongoose.model('Order');
+var itemSchema = require('./item');
 
 var schema = new mongoose.Schema({
     email: {
@@ -18,10 +19,7 @@ var schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    cart: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
-    }],
+    cart: [itemSchema],
     orders: [{
 
         type: mongoose.Schema.Types.ObjectId,
