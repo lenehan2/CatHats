@@ -11,8 +11,8 @@ app.config(function ($stateProvider) {
 	});
 })
 
-app.controller('addProductCtrl',function($scope,AuthService,products,ProductFactory){
-	$scope.addProduct = ProductFactory.addProduct;
+app.controller('addProductCtrl',function($scope,products,CartFactory){
+	$scope.addProduct = CartFactory.addProduct;
 	
 	$scope.products = products;
 
