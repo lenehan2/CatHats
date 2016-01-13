@@ -1,0 +1,11 @@
+<div class="container">
+    <p ng-show='cart.length === 0'>You have no items, buy something!</p>
+    <form ng-submit='updateCart(cart)'>
+	    <div ng-repeat="item in cart">
+	        <p>{{item.product.title}}</p>
+	        <input type="number" min='0' ng-model="item.quantity" ng-change="updateCart(cart)">
+	    </div>
+	    <input type="submit" value="Update Cart">
+    </form>
+</div>
+
