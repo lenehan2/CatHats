@@ -5,8 +5,10 @@ app.factory('ProductFactory',function($http){
 			return $http({
 				method: 'GET',
 				url: '/api/products'
-			}).then(response => response.data)
+			}).then(response => {
+				console.log("in ProductFactory ", response)
+				return response.data;
+			})
 		}
-		
 	}
 })
