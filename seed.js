@@ -76,7 +76,7 @@ var seedProducts = function() {
         title: "Holiday Elf Cat Costume",
         price: 249,
         description: "Petco Holiday Elf Cat Costume, One Size Fits Most",
-        category: ["Costume", "Seasonal"],
+        category: ["Costumes", "Seasonal"],
         inventory: 20,
         imageUrl: "http://i0.wp.com/theverybesttop10.files.wordpress.com/2013/12/the-world_s-top-10-best-images-of-cats-in-elf-costumes-7.jpg?resize=418%2C538"
     }, {

@@ -4,19 +4,21 @@ var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
 var Review = mongoose.model('Review');
 
+
 router.get('/', function (req, res, next) {
-    Product.find()
+
+    Product.find({title : req.query.title, category : req.query.category})
     .then(products => res.json(products))
     .then(null, next);
 });
 
-router.get('/:category', function(req, res, next){
-    Product.find( { 'category' : req.params.category } )
-    .then(products => {
-        res.status(200).json(products);
-    })
-    .then(null, next);
-})
+// router.get('/:category', function(req, res, next){
+//     Product.find( { 'category' : req.params.category } )
+//     .then(products => {
+//         res.status(200).json(products);
+//     })
+//     .then(null, next);
+// })
 
 router.param('id', function (req, res, next, id) {
     Product.findById(id)
@@ -38,18 +40,33 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+    //ADMIN AUTHENTICATION
+    if(!req.user.isAdmin){
+        res.status(403).end();
+    }
+
     Product.create(req.body)
         .then(product => res.json(product))
         .then(null, next);
 });
 
 router.delete('/:id', function (req, res, next) {
+    //ADMIN AUTHENTICATION
+    if(!req.user.isAdmin){
+        res.status(403).end();
+    }
+
     Product.remove(req.product)
         .then(() => res.status(204).send())
         .then(null, next);
 });
 
 router.put('/:id', function (req, res, next) {
+    //ADMIN AUTHENTICATION
+    if(!req.user.isAdmin){
+        res.status(403).end();
+    }
+
     Object.keys(req.body).forEach(function (key) {
         req.product[key] = req.body[key];
     });
