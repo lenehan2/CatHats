@@ -73,7 +73,6 @@ schema.methods.addToCart = function (newProduct) {
     var existing = this.cart.find(function (item) {
         return item.product.toString() === newProduct.product.toString();
     });
-    console.log('existing: ', existing);
     if (existing) existing.quantity += newProduct.quantity;
     else this.cart.push(newProduct);
 

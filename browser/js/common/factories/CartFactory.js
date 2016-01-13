@@ -1,5 +1,5 @@
 app.factory('CartFactory', function($http) {
-    
+
 
     var cartFactoryObj = {
         getCart: function() {
@@ -17,14 +17,22 @@ app.factory('CartFactory', function($http) {
                         quantity: 1
                     }
                 })
-                .then(response => response.data)
-                .then(console.log.bind(console));
+                .then(response => {
+                    console.log('server response: ', response.data);
+                    return response.data
+                })
         },
         updateCart: function(cart){
+            var cartToSend = cart.map(function (item) {
+                return {
+                    product: item.product._id ? item.product._id : item.product,
+                    quantity: item.quantity
+                }
+            })
         	return $http({
         		method: 'PUT',
         		url: '/api/cart',
-        		data: cart
+        		data: cartToSend
         	}).then(response => response.data)
         },
         removeItem: function(productId,cart){
