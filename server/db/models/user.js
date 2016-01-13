@@ -3,6 +3,8 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var _ = require('lodash');
 var Order = mongoose.model('Order');
+var Product = mongoose.model('Product');
+var itemSchema = require('./item');
 
 var schema = new mongoose.Schema({
     email: {
@@ -18,10 +20,7 @@ var schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    cart: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
-    }],
+    cart: [itemSchema],
     orders: [{
 
         type: mongoose.Schema.Types.ObjectId,
@@ -69,6 +68,26 @@ schema.methods.findOrCreateCart = function(){
         }
     })
 }
+
+schema.methods.addToCart = function (newProduct) {
+    var existing = this.cart.find(function (item) {
+        return item.product.toString() === newProduct.product.toString();
+    });
+    console.log('existing: ', existing);
+    if (existing) existing.quantity += newProduct.quantity;
+    else this.cart.push(newProduct);
+
+    return this.save();
+};
+
+schema.methods.populateCart = function () {
+    var user = this;
+
+    return Product.populate(user, { path: 'cart.product' }, function (err, user) {
+        if (err) throw err;
+        return user;
+    });
+};
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.

@@ -1,18 +1,16 @@
 var mongoose = require('mongoose');
+var itemSchema = require('./item');
 
 var categories = [];
 
 var schema = new mongoose.Schema({
 
-	products: [{
-		type: mongoose.Schema.Types.ObjectId, 
-		ref: 'Product'
-	}],
+	products: [itemSchema],
 	orderDate: {
 		type: Date,
 	},
 	user: {
-		type: mongoose.Schema.Types.ObjectId, 
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Order'
 	},
 	ordered: {
