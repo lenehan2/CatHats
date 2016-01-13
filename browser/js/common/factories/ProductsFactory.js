@@ -10,9 +10,14 @@ app.factory('ProductFactory',function($http){
 		addProduct: function(productId){
 			return $http({
 				method: 'POST',
-				url: '/api/orders/cart/addToCart',
-				data: {productId: productId}
-			}).then(response => response.data)
+				url: '/api/cart',
+				data: {
+                    product: productId,
+                    quantity: 1
+                }
+			})
+            .then(response => response.data)
+            .then(console.log.bind(console));
 		}
 	}
 })
