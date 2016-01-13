@@ -2,12 +2,21 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 
 var Product = mongoose.model('Product');
+var Review = mongoose.model('Review');
 
 router.get('/', function (req, res, next) {
     Product.find()
     .then(products => res.json(products))
     .then(null, next);
 });
+
+router.get('/:category', function(req, res, next){
+    Product.find( { 'category' : req.params.category } )
+    .then(products => {
+        res.status(200).json(products);
+    })
+    .then(null, next);
+})
 
 router.param('id', function (req, res, next, id) {
     Product.findById(id)
@@ -45,6 +54,13 @@ router.put('/:id', function (req, res, next) {
         req.product[key] = req.body[key];
     });
     req.product.save()
+        .then(product => res.json(product))
+        .then(null, next);
+});
+
+//ADD REVIEW TO PRODUCT
+router.post('/:id/reviews', function(req, res, next){
+    Review.create(req.body)
         .then(product => res.json(product))
         .then(null, next);
 });
