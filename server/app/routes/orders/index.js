@@ -6,7 +6,6 @@ var Order = mongoose.model('Order');
 var User = mongoose.model('User');
 var Product = mongoose.model('Product');
 
-
 router.get('/', function(req, res, next) {
     res.status(200).send('Nothing here ya dang dingus');
 });
@@ -42,6 +41,12 @@ router.get('/cart', function(req, res, next) {
     }
 
 });
+
+router.post('/cart/addToCart',function(req,res,next){
+    if(req.user)
+    console.log("HIT THIS: ",req.body)
+    res.status(201).send("req.body")
+})
 
 
 module.exports = router;

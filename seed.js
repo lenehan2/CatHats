@@ -130,11 +130,11 @@ connectToDb.then(function() {
             return seedUsers();
         } else {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
-            process.kill(0);
+            // process.kill(0);
         }
     }).then(function() {
         console.log(chalk.green('User Seed successful!'));
-        process.kill(0);
+        // process.kill(0);
     }).catch(function(err) {
         console.error(err);
         process.kill(1);
