@@ -5,6 +5,7 @@ var _ = require('lodash');
 var Order = mongoose.model('Order');
 var Product = mongoose.model('Product');
 var itemSchema = require('./item');
+var Promise = require('bluebird');
 
 var schema = new mongoose.Schema({
     email: {
@@ -69,13 +70,32 @@ schema.methods.findOrCreateCart = function(){
     })
 }
 
+schema.methods.syncCart = function(productArr){
+
+    var self = this;
+
+    productArr.forEach(function(newProduct){
+        var existing = self.cart.find(function (item) {
+            return item.product.toString() === newProduct.product.toString();
+        });
+        if (existing) existing.quantity += newProduct.quantity;
+        else self.cart.push(newProduct);
+    })
+
+    return this.save();   
+
+}
+
 schema.methods.addToCart = function (newProduct) {
+    
     var existing = this.cart.find(function (item) {
         return item.product.toString() === newProduct.product.toString();
     });
     if (existing) existing.quantity += newProduct.quantity;
     else this.cart.push(newProduct);
-
+    // console.log("newProduct", newProduct);
+    // console.log("typeof newProduct.id", typeof newProduct.id);
+    // console.log("this.cart", this.cart)
     return this.save();
 };
 
