@@ -3,48 +3,48 @@ var mongoose = require('mongoose');
 var Promise = require('bluebird');
 
 var Product = mongoose.model('Product');
+var Order = mongoose.model('Order');
+
+router.param('id', function (req, res, next, id) {
+    Order.findById(id)
+        .then(order => {
+            if (!order) {
+                var err = new Error('Order not found');
+                err.status = 404;
+                return next(err);
+            }
+            req.order = order;
+        });
+});
 
 router.get('/', function(req, res, next) {
     res.status(200).send('Nothing here ya dang dingus');
 });
 
-router.get('/cart/addToCart/:id',function(req,res,next){
-    if (req.user) {
-        req.user.cart.push(req.params.id);
-        req.user.save()
-            .then(user => {
-                user.populate('cart', function (err, user) {
-                    res.status(201).json(user.cart);
-                });
-            })
-    } else {
-        req.session.cart = req.session.cart || [];
-        req.session.cart.push(req.params.id);
-        var promises = req.session.cart.map(productId => {
-            return Product.findById(productId);
-        });
-
-        Promise.all(promises)
-            .then(products => {
-                res.status(201).json(products);
-            })
-    }
+router.post('/', function (req, res, next) {
+    Order.create(req.body)
+        .then(order => res.status(201).json(order))
+        .then(null, next);
 });
 
-router.get('/cart', function(req, res, next) {
-    if (req.user) {
-        res.status(200).send(req.user.cart);
+//route to cancel an order
+router.put('/:id', function (req, res, next) {
+    var err = new Error('Not authorized');
+    err.status = 403;
+
+    if (!req.user) return next(err);
+    if (!req.user.isAdmin) return next(err);
+    if (req.user._id !== req.order.user) return next(err);
+
+    if (req.body.status === 'cancelled') {
+        req.order.status === 'cancelled';
+        req.order.save()
+            .then((order) => res.status(200).json(order))
+            .then(null, next);
     } else {
-        res.status(200).send(req.session.cart);
+        next(err);
     }
 
 });
-
-router.post('/cart/addToCart',function(req,res,next){
-    if(req.user)
-    console.log("HIT THIS: ",req.body)
-    res.status(201).send("req.body")
-})
-
 
 module.exports = router;
