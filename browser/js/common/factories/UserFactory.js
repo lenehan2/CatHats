@@ -1,4 +1,4 @@
-app.factory('UserFactory', function($http){
+app.factory('UserFactory', function($http, AuthService){
 	
 	return {
 
@@ -8,7 +8,12 @@ app.factory('UserFactory', function($http){
 		},
 
 		fetchOne: function(){
-			return $http.get('/api/users/' )
+			return $http.get('/api/users/')
+		},
+
+		signup: function(user){
+			return $http.post('/api/users/', user)
+			.then(AuthService.getLoggedInUser.bind(AuthService));
 		}
 
 	}
