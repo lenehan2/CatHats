@@ -1,25 +1,32 @@
 var mongoose = require('mongoose');
-var itemSchema = require('./item');
+var orderItemSchema = require('./orderItem');
+var addressSchema = require('./address');
 
 var schema = new mongoose.Schema({
 
-	products: [itemSchema],
+	products: [orderItemSchema],
+    shipping: { addressSchema },
+    payment: {
+        creditCardNumber: {
+            type: String,
+            minlength: 16,
+            maxlength: 16
+        },
+        billingAddress: { addressSchema }
+    },
 	orderDate: {
 		type: Date,
+        default: Date.now
 	},
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Order'
+		ref: 'User'
 	},
-	ordered: {
-		type: Boolean,
-		default: false
+	status: {
+		type: String,
+		enum: ['created', 'processing', 'cancelled', 'completed'],
+        default: 'created'
 	}
 });
-
-schema.methods.addProduct = function(productId){
-
-	this.products.push(productId);
-}
 
 mongoose.model('Order', schema);
