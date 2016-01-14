@@ -1,0 +1,12 @@
+<div class="container">
+    <div>
+        <h2>
+        	{{ product.title }}
+        </h2>
+        <p>
+        	{{ product.price/100 | currency : "$" }}
+        </p>
+        <img ng-src="{{ product.imageUrl }}">
+
+    </div>
+</div>

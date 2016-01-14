@@ -21,15 +21,15 @@ router.param('id', function (req, res, next, id) {
 
 router.get('/', function (req, res, next) {
     Product.find(req.query)
-    .then(products => res.json(products))
-    .then(null, next);
+        .then(products => res.json(products))
+        .then(null, next);
 });
 
 //ADD REVIEW TO PRODUCT
 router.post('/:id/reviews', function(req, res, next){
     Review.create(req.body)
-    .then(product => res.json(product))
-    .then(null, next);
+        .then(product => res.json(product))
+        .then(null, next);
 });
 
 //check if the current user is an admin
