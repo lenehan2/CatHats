@@ -1,2 +1,26 @@
-<div class="container">You're Checking Out</div>
-{{ cart }}
+<div class="container">You're Checking Out
+    <form ng-submit="placeOrder(order)" novalidate>
+        <div class="container">
+            <h3>Please input shipping information</h3>
+         
+                Full Name:
+                <input name="shippingFullName" type="text" required ng-model="order.shipping.name"> Address line 1:
+                <input name="address" type="text" required ng-model="order.shipping.address"> City:
+                <input name="city" type="text" required ng-model="order.shipping.city"> State:
+                <input name="state" type="text" required ng-model="order.shipping.state"> ZIP:
+                <input name="zip" type="text" required ng-model="order.shipping.zip">
+        </div>
+        <div class="container">
+            <h3>Please input Billing information</h3>
+                Name on Card:
+                <input name="nameOnCard" type="text" required ng-model="order.billing.name"> CreditCard Number:
+                <input name="creditCardNumber" type="text" required ng-model="order.billing.creditCardNumber"> Exp:
+                <input name="exp" type="text" required ng-model="order.billing.expiration"> CSV:
+                <input name="csv" type="text" required ng-model="order.billing.csv">
+        </div>
+        <button type='submit'>Place Order</button>
+        <!-- <input type="submit"> -->
+    </form>
+</div>
+
+
