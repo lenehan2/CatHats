@@ -11,7 +11,7 @@ var clearDB = require('mocha-mongoose')(dbURI);
 var supertest = require('supertest');
 var app = require('../../../server/app');
 
-describe('Members Route', function () {
+describe('Cart Route', function () {
 
 	beforeEach('Establish DB connection', function (done) {
 		if (mongoose.connection.db) return done();
@@ -22,23 +22,47 @@ describe('Members Route', function () {
 		clearDB(done);
 	});
 
-	describe('Unauthenticated request', function () {
+	describe('Unauthenticated user requesting cart', function () {
 
 		var guestAgent;
+
+		var product = {product: '56968d063204a514981c4d84', quantity: 2};
 
 		beforeEach('Create guest agent', function () {
 			guestAgent = supertest.agent(app);
 		});
 
-		it('should get a 401 response', function (done) {
-			guestAgent.get('/api/members/secret-stash')
-				.expect(401)
-				.end(done);
+		it('should get a 200 response', function (done) {
+			guestAgent.get('/api/cart')
+				.expect(200)
+				.end(function (err, response) {
+				if (err) return done(err);
+				expect(response.body).to.be.an('array');
+				done();
+			});
 		});
+
+		it('should add an item to the users cart',function(done){
+			guestAgent.post('/api/cart').send(product).end(function(err,response){
+				if(err) return done(err);
+				expect(response.body).to.be.an('array');
+				
+				guestAgent.get('/api/cart')
+				.expect(200)
+				.end(function (err, response){
+					if(err) return done(err);
+					expect(response.body).to.have.length(1);
+					done()
+				})
+//Test for quantity addition
+			})
+
+
+		})
 
 	});
 
-	xdescribe('Authenticated request', function () {
+	describe('Authenticated request', function () {
 
 		var loggedInAgent;
 
