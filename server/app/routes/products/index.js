@@ -40,8 +40,8 @@ router.get('/:id', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     //ADMIN AUTHENTICATION
-    if(!req.user.isAdmin){
-        res.status(403).end();
+    if(!req.user || !req.user.isAdmin){
+        return res.status(403).end();
     }
 
     Product.create(req.body)
@@ -51,8 +51,8 @@ router.post('/', function (req, res, next) {
 
 router.delete('/:id', function (req, res, next) {
     //ADMIN AUTHENTICATION
-    if(!req.user.isAdmin){
-        res.status(403).end();
+    if(!req.user || !req.user.isAdmin){
+        return res.status(403).end();
     }
 
     Product.remove(req.product)
@@ -62,8 +62,8 @@ router.delete('/:id', function (req, res, next) {
 
 router.put('/:id', function (req, res, next) {
     //ADMIN AUTHENTICATION
-    if(!req.user.isAdmin){
-        res.status(403).end();
+    if(!req.user || !req.user.isAdmin){
+        return res.status(403).end();
     }
 
     Object.keys(req.body).forEach(function (key) {
