@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var itemSchema = require('./item');
 
-var categories = [];
-
 var schema = new mongoose.Schema({
 
 	products: [itemSchema],

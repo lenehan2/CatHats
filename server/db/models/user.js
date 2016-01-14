@@ -5,7 +5,6 @@ var _ = require('lodash');
 var Order = mongoose.model('Order');
 var Product = mongoose.model('Product');
 var itemSchema = require('./item');
-var Promise = require('bluebird');
 
 var schema = new mongoose.Schema({
     email: {

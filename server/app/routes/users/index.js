@@ -1,7 +1,6 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var _ = require('lodash');
 
 router.param('id',function(req,res,next,id){
 	User.findById(id).exec()
@@ -58,7 +57,7 @@ router.post('/', function(req,res,next){
 				// We respond with a response object that has user with _id and email.
 				if(req.session.cart){
 					req.user.syncCart(req.session.cart)
-					.then(function(cart){
+					.then(function(){
 						req.session.cart = null;
 						res.status(200).send({
 							user: user.sanitize()

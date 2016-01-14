@@ -1,6 +1,6 @@
 'use strict';
 var passport = require('passport');
-var _ = require('lodash');
+//var _ = require('lodash');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -45,7 +45,7 @@ module.exports = function (app) {
                 // We respond with a response object that has user with _id and email.
                 if(req.session.cart){
                     req.user.syncCart(req.session.cart)
-                    .then(function(cart){
+                    .then(function(){
                         req.session.cart = null;
                         res.status(200).send({
                             user: user.sanitize()
