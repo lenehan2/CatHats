@@ -5,10 +5,14 @@ app.factory('ProductFactory',function($http){
 			return $http({
 				method: 'GET',
 				url: '/api/products'
-			}).then(response => {
-				console.log("in ProductFactory ", response)
-				return response.data;
-			})
+			}).then(response => response.data)
+		},
+
+		getSingleProduct: function(productId){
+			return $http({
+				method: 'GET',
+				url: '/api/products/' + productId
+			}).then(response => response.data)
 		}
 	}
 })
