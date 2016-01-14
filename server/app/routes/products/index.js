@@ -6,18 +6,12 @@ var Review = mongoose.model('Review');
 
 
 router.get('/', function (req, res, next) {
+
     Product.find(req.query)
     .then(products => res.json(products))
     .then(null, next);
+    
 });
-
-// router.get('/:category', function(req, res, next){
-//     Product.find( { 'category' : req.params.category } )
-//     .then(products => {
-//         res.status(200).json(products);
-//     })
-//     .then(null, next);
-// })
 
 router.param('id', function (req, res, next, id) {
     Product.findById(id)
