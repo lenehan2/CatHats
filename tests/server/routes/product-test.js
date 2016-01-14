@@ -60,10 +60,6 @@ describe('Product Route', function () {
         done();
     });
 
-    beforeEach('Create guest agent', function () {
-        agent = supertest.agent(app);
-    });
-
     describe('Adding products', function () {
 
         it('allows an admin to add a product', function (done) {
