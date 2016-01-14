@@ -1,0 +1,7 @@
+<div class="container">
+	<p>Here's some products</p>
+	<form ng-submit='addProduct(cart.addedProduct._id)'>
+		<select ng-options="product.title for product in products" ng-model='cart.addedProduct'></select>
+		<input type="submit" value="Submit">
+	</form>
+</div>
