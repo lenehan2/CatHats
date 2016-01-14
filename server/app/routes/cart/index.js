@@ -23,7 +23,6 @@ var populateCart = function (cart, req) {
 };
 
 var addToCart = function (newProduct, cart) {
-    console.log('new product: ', newProduct);
     var existing = cart.find(function (item) {
         return item.product.toString() === newProduct.product.toString();
     });
@@ -34,6 +33,7 @@ var addToCart = function (newProduct, cart) {
 router.use(function (req, res, next) {
     if (req.user) {
         req.cart = req.user.cart;
+        console.log("req.cart from use", req.cart);
     } else {
         req.session.cart = req.session.cart || [];
         req.cart = req.session.cart;
@@ -47,6 +47,8 @@ router.get('/', function (req, res, next) {
             .then(cart => res.status(200).json(cart))
             .then(null, next);
     } else {
+        console.log("req.cart", req.cart);
+        console.log("req.user.cart from get", req.user.cart);
         req.user.populateCart()
             .then(user => res.status(200).json(user.cart))
             .then(null, next);
