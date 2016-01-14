@@ -12,6 +12,8 @@ var schema = new mongoose.Schema({
             minlength: 16,
             maxlength: 16
         },
+        nameOnCard: { type: String },
+        csv: { type: String },
         billingAddress: { addressSchema }
     },
 	orderDate: {
