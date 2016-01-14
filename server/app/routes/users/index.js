@@ -50,10 +50,28 @@ router.put('/:id', function(req,res,next){
     .then(null, next);
 });
 
-router.post('/createAccount', function(req,res,next){
+router.post('/', function(req,res,next){
 	User.create(req.body)
-	.then(user => res.json(user))
-	.then(null, next);
+		.then(user => {
+			req.logIn(user, function (loginErr) {
+				if (loginErr) return next(loginErr);
+				// We respond with a response object that has user with _id and email.
+				if(req.session.cart){
+					req.user.syncCart(req.session.cart)
+					.then(function(cart){
+						req.session.cart = null;
+						res.status(200).send({
+							user: user.sanitize()
+						});
+					})
+				} else {
+					res.status(200).send({
+						user: user.sanitize()
+					});
+				}
+			});
+		})
+		.then(null, next);
 });
 
 module.exports = router
