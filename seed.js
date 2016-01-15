@@ -47,28 +47,28 @@ var seedProducts = function() {
         title: 'Catman Costume',
         price: '40000',
         description: "This Catman costume for medium sized felines will turn your innocent little tabby into a feared protector of the night!  Cat burglars beware!",
-        category: ['Costumes'],
+        categories: ['Costumes'],
         inventory: 20,
         imageUrl: 'https://www.texashumaneheroes.org/wp-content/uploads/Halloween-cat-batman.jpg'
     }, {
         title: 'Super Cat',
         price: '60000',
         description: "This Superman costume for small sized felines will turn Mr. Mittens into a mighty Krypotnian!  His only weakness is Catniptonite!",
-        category: ['Costumes'],
+        categories: ['Costumes'],
         inventory: 10,
         imageUrl: 'http://cdn2.business2community.com/wp-content/uploads/2014/10/Superman-Cat-Halloween-Costume.jpg-600x525.jpg'
     }, {
         title: 'Down Vest',
         price: '80000',
         description: "This Vest filled with Premium Down Feathers will keep Tubbs warm while she is out in the snow hunting geese to make another jacket!",
-        category: ['Outerware'],
+        categories: ['Outerware'],
         inventory: 6,
         imageUrl: 'http://thumb7.shutterstock.com/display_pic_with_logo/2862790/354123959/stock-photo-animals-as-a-human-cat-in-down-vest-and-sweater-hand-drawn-illustration-digitally-colored-354123959.jpg'
     }, {
         title: "Star Wars Yoda Cat Headpiece",
         price: 499,
         description: "These STAR WARS Yoda ears come with an adjustable velcro band that fits comfortably around your cat's head. The ears feature great details including Yoda's characteristic fuzzy white hair.",
-        category: ["Costumes"],
+        categories: ["Costumes"],
         inventory: 100,
         imageUrl: "http://mousebreath.com/wp-content/uploads/2013/08/mao-yoda-petco.jpg"
 
@@ -76,21 +76,21 @@ var seedProducts = function() {
         title: "Holiday Elf Cat Costume",
         price: 249,
         description: "Petco Holiday Elf Cat Costume, One Size Fits Most",
-        category: ["Costumes", "Seasonal"],
+        categories: ["Costumes", "Seasonal"],
         inventory: 20,
         imageUrl: "http://i0.wp.com/theverybesttop10.files.wordpress.com/2013/12/the-world_s-top-10-best-images-of-cats-in-elf-costumes-7.jpg?resize=418%2C538"
     }, {
         title: 'Knitty kitty',
         price: 30,
         description: 'Knited cat hat',
-        category: ['Seasonal'],
+        categories: ['Seasonal'],
         inventory: 4,
         imageUrl: 'https://img0.etsystatic.com/il_570xN.255351194.jpg'
     }, {
         title: 'Feline Fedora',
         price: 1000,
         description: 'For all the cool cats that live in Williamsburg.',
-        category: ['Formal'],
+        categories: ['Formal'],
         inventory: 12,
         imageUrl: 'http://40.media.tumblr.com/540a28920fe85253fc2491f223edeccd/tumblr_n33y6m1OYM1twmvaao1_540.jpg'
     }, {
@@ -103,7 +103,7 @@ var seedProducts = function() {
         title: "Cat Saddle with Cowboy Bear",
         price: 1599,
         description: "The Wild West...with cats!",
-        category: ["Costumes"],
+        categories: ["Costumes"],
         inventory: 5,
         imageUrl: "http://www.styletails.com/wp-content/uploads/2014/10/Ride-On-Cat-Costume.jpg"
     }, {
@@ -116,7 +116,7 @@ var seedProducts = function() {
         title: 'Frawg',
         price: 100000,
         description: 'When your cat wants a frawg, you get your cat a frawg',
-        category: ['Costumes'],
+        categories: ['Costumes'],
         inventory: 10,
         imageUrl: ['http://www.whatpoll.com/Posts/cats%20with%20hats%202487.jpg']
     }]

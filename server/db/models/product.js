@@ -16,7 +16,7 @@ var schema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	category: [{
+	categories: [{
 		type: String,
 		enum: categories
 	}],
@@ -28,7 +28,7 @@ var schema = new mongoose.Schema({
 		type: String
 	},
 	reviews: [{
-		type: mongoose.Schema.Types.ObjectId, 
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Review'
 	}]
 });
