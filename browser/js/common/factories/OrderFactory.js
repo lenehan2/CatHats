@@ -1,5 +1,6 @@
 app.factory('OrderFactory', function ($http) {
     return {
+        //This should probable be '/api/user/orders'
         getOrdersByUser: function (userId) {
             return $http.get('/api/users/' + userId + '/orders')
                 .then(res => res.data)
