@@ -13,8 +13,7 @@ app.config(function($stateProvider) {
 
 app.controller('cartCtrl', function($scope, cart, CartFactory) {
     $scope.cart = cart;
-    $scope.order = {}
-    $scope.order.cart = cart;
+    $scope.order = {cart: cart};
     $scope.updateCart = CartFactory.updateCart;
     $scope.removeItem = function(productId,cartObj){
 
@@ -23,7 +22,7 @@ app.controller('cartCtrl', function($scope, cart, CartFactory) {
 
     }
     $scope.placeOrder = function (order){
-        console.log("order")
+        CartFactory.checkout(order);
     }
 
 })
