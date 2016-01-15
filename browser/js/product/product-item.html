@@ -1,0 +1,15 @@
+<img ng-src="{{product.imageUrl}}" class="img-responsive">
+<h3>{{product.title}}</h3>
+<p>{{product.price / 100 | currency }}</p>
+<p>
+    <span ng-repeat="category in product.categories">
+        <span ng-if="$index > 0">, </span>
+        {{category}}
+    </span>
+</p>
+<p ng-if="full">{{product.description}}</p>
+<a ui-sref="singleProduct({ productId: product._id })" ng-if="!full">
+    <p>More Info</p>
+</a>
+<button ng-click="addToCart(product._id)" class="btn">Add to Cart</button>
+<h3 ng-if="full">MAKE A REVIEW DIRECTIVE AND PUT IT HERE</h3>

@@ -13,6 +13,18 @@ app.factory('ProductFactory',function($http){
 				method: 'GET',
 				url: '/api/products/' + productId
 			}).then(response => response.data)
+		},
+
+		getByCategory: function (category) {
+			return $http({
+				method: 'GET',
+				url: '/api/products',
+				params: {
+					categories: [category]
+				}
+			})
+			.then(response => response.data)
+			.then(null, console.error.bind(console))
 		}
 	}
 })

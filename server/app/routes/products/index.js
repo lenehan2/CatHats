@@ -32,6 +32,10 @@ router.post('/:id/reviews', function(req, res, next){
         .then(null, next);
 });
 
+router.get('/:id', function (req, res, next) {
+    res.json(req.product);
+});
+
 //check if the current user is an admin
 //all routes below this require admin priveleges
 router.use(function (req, res, next) {
@@ -42,10 +46,6 @@ router.use(function (req, res, next) {
     } else {
         next();
     }
-});
-
-router.get('/:id', function (req, res, next) {
-    res.json(req.product);
 });
 
 router.post('/', function (req, res, next) {

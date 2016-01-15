@@ -1,0 +1,21 @@
+product-categories {
+
+    input {
+        & + ul {
+            display: none;
+        }
+
+        &:focus + ul, & + ul:active {
+            display: block;
+        }
+    }
+
+    ul {
+        list-style: none;
+        background-color: black;
+        color: white;
+        a {
+            color: inherit;
+        }
+    }
+}

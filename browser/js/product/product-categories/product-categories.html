@@ -1,0 +1,14 @@
+<div>
+    <input
+        type="text"
+        placeholder="Filter categories..."
+        ng-model="query"
+    >
+    <ul class="category-list">
+        <li ng-repeat="category in categories | filter : query">
+            <a ui-sref="products.byCategory({ category: category })">
+                {{category}}
+            </a>
+        </li>
+    </ul>
+</div>
