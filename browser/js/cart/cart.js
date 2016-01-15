@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
 
 app.controller('cartCtrl', function($scope, cart, CartFactory) {
     $scope.cart = cart;
-    $scope.order = {test: 'test'}
+    $scope.order = {}
     $scope.order.cart = cart;
     $scope.updateCart = CartFactory.updateCart;
     $scope.removeItem = function(productId,cartObj){
