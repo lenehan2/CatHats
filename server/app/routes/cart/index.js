@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var _ = require('lodash');
-
+var Order = require('mongoose').model('Order');
 var Product = require('mongoose').model('Product');
 //
 // schema.methods.populateCart = function () {
@@ -11,6 +11,7 @@ var Product = require('mongoose').model('Product');
 //         return user;
 //     });
 // };
+
 
 var populateCart = function (cart, req) {
     cart = _.cloneDeep(cart);
@@ -81,6 +82,23 @@ router.put('/', function (req, res, next) {
             .then(user => res.status(201).json(user.cart))
             .then(null, next)
     }
+});
+
+//CREATE NEW ORDER
+
+router.post('/checkout', function (req, res, next) {
+    var order;
+
+    Order.create(req.body)
+        .then(newOrder => {
+            order = newOrder;
+            if (!req.user) return req.session.cart = {};
+
+            req.user.cart = {};
+            return req.user.save();
+        })
+        .then(() => res.status(201).json(order))
+        .then(null, next);
 });
 
 module.exports = router;
