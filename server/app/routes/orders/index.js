@@ -7,18 +7,27 @@ var Order = mongoose.model('Order');
 
 router.param('id', function (req, res, next, id) {
     Order.findById(id)
+        .populate('products.product')
         .then(order => {
+            console.log(order);
             if (!order) {
                 var err = new Error('Order not found');
                 err.status = 404;
                 return next(err);
             }
             req.order = order;
-        });
+            next();
+        })
+        .then(null, next);
 });
 
 router.get('/', function(req, res, next) {
     res.status(200).send('Nothing here ya dang dingus');
+});
+
+router.get('/:id', function (req, res, next) {
+    console.log('line 26: ', req.order);
+    res.status(200).json(req.order);
 });
 
 router.post('/', function (req, res, next) {
@@ -28,8 +37,9 @@ router.post('/', function (req, res, next) {
         .then(newOrder => {
             order = newOrder;
             if (!req.user) return req.session.cart = {};
-            
+
             req.user.cart = {};
+            req.user.orders.push(order._id);
             return req.user.save();
         })
         .then(() => res.status(201).json(order))
