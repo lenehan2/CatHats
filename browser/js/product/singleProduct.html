@@ -1,12 +1,7 @@
 <div class="container">
-    <div>
-        <h2>
-        	{{ product.title }}
-        </h2>
-        <p>
-        	{{ product.price/100 | currency : "$" }}
-        </p>
-        <img ng-src="{{ product.imageUrl }}">
-
-    </div>
+    <product-item
+        class="col-xs-12"
+        product="product"
+        full="true">
+    </product-item>
 </div>
