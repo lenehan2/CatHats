@@ -49,21 +49,21 @@ var seedProducts = function() {
         description: "This Catman costume for medium sized felines will turn your innocent little tabby into a feared protector of the night!  Cat burglars beware!",
         category: ['Costumes'],
         inventory: 20,
-        imageUrl: 'https://www.google.com/imgres?imgurl=https://s-media-cache-ak0.pinimg.com/236x/73/69/50/7369500b820eca96e0500f1370d9e835.jpg&imgrefurl=https://www.pinterest.com/yvonnenaudack/cats-in-costume2/&h=354&w=236&tbnid=jzjp_hI_syTG3M:&docid=zKbeo1x4m_LUjM&ei=APqTVtWMFYrk-QHWjpFo&tbm=isch&ved=0ahUKEwjVjN-Lt6LKAhUKcj4KHVZHBA0QMwgfKAIwAg'
+        imageUrl: 'https://www.texashumaneheroes.org/wp-content/uploads/Halloween-cat-batman.jpg'
     }, {
         title: 'Super Cat',
         price: '60000',
         description: "This Superman costume for small sized felines will turn Mr. Mittens into a mighty Krypotnian!  His only weakness is Catniptonite!",
         category: ['Costumes'],
         inventory: 10,
-        imageUrl: 'https://www.google.com/imgres?imgurl=http://giveitlove.com/wp-content/uploads/Superman-Cat-Halloween-Costume.jpg&imgrefurl=http://www.business2community.com/social-buzz/28-halloween-costumes-for-cats-that-will-put-a-smile-on-your-face-01037524&h=578&w=660&tbnid=_55UI4PYvpKX9M:&docid=qsh2r5jtk7jWMM&ei=APqTVtWMFYrk-QHWjpFo&tbm=isch&ved=0ahUKEwjVjN-Lt6LKAhUKcj4KHVZHBA0QMwghKAQwBA'
+        imageUrl: 'http://cdn2.business2community.com/wp-content/uploads/2014/10/Superman-Cat-Halloween-Costume.jpg-600x525.jpg'
     }, {
         title: 'Down Vest',
         price: '80000',
         description: "This Vest filled with Premium Down Feathers will keep Tubbs warm while she is out in the snow hunting geese to make another jacket!",
         category: ['Outerware'],
         inventory: 6,
-        imageUrl: 'https://www.google.com/imgres?imgurl=https://s-media-cache-ak0.pinimg.com/236x/65/6f/26/656f266c732fa2d75656b6cac6ea2b26.jpg&imgrefurl=https://www.pinterest.com/eming358/cats-dressed-up/&h=352&w=236&tbnid=0tYDJ7-4mH73NM:&docid=8s_pnzaPU8p_FM&ei=lfuTVuP7M8a3-QH8pKtA&tbm=isch&ved=0ahUKEwijmo3NuKLKAhXGWz4KHXzSCggQMwghKAUwBQ'
+        imageUrl: 'http://thumb7.shutterstock.com/display_pic_with_logo/2862790/354123959/stock-photo-animals-as-a-human-cat-in-down-vest-and-sweater-hand-drawn-illustration-digitally-colored-354123959.jpg'
     }, {
         title: "Star Wars Yoda Cat Headpiece",
         price: 499,
