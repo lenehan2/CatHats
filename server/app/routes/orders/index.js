@@ -22,8 +22,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+    var order;
+
     Order.create(req.body)
-        .then(order => res.status(201).json(order))
+        .then(newOrder => {
+            order = newOrder;
+            if (!req.user) return req.session.cart = {};
+            
+            req.user.cart = {};
+            return req.user.save();
+        })
+        .then(() => res.status(201).json(order))
         .then(null, next);
 });
 
