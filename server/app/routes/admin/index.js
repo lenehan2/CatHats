@@ -37,4 +37,28 @@ router.get('/users', function(req, res, next) {
         .then(null, next)
 })
 
+//GET ORDERS BY USER
+
+router.get('users/:id/orders',function(req,res,next){
+	console.log("HIT")
+	Order.find({ user: req.params.id })
+		.then(orders => res.json(orders))
+		.then(null, next);
+});
+
+//Allows an admin to update a users status to admin
+
+router.put('/users/:id', function(req, res, next) {
+    if (!req.user || !req.user.isAdmin) { //<--Unnecessary?
+        return res.status(403).end();
+    }
+    User.findById(req.params.id)
+        .then(user => {
+            if (user) {
+                user.isAdmin = true;
+            }
+            return user;
+        }).then(user => res.status(204).json(user))
+})
+
 module.exports = router;
