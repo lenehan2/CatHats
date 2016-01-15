@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Order = mongoose.model('Order');
 
 router.param('id',function(req,res,next,id){
 	User.findById(id)
@@ -35,7 +36,9 @@ router.get('/:id',function(req,res,next){
 });
 
 router.get('/:id/orders',function(req,res,next){
-	res.status(200).json(req.foundUser.orders);
+	Order.find({ user: req.params.id })
+		.then(orders => res.json(orders))
+		.then(null, next);
 });
 
 //UPDATE USER ACCOUNT
