@@ -21,12 +21,6 @@ var schema = new mongoose.Schema({
         default: false
     },
     cart: [itemSchema],
-    orders: [{
-
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order'
-
-    }],
     salt: {
         type: String
     },
@@ -81,12 +75,12 @@ schema.methods.syncCart = function(productArr){
         else self.cart.push(newProduct);
     })
 
-    return this.save();   
+    return this.save();
 
 }
 
 schema.methods.addToCart = function (newProduct) {
-    
+
     var existing = this.cart.find(function (item) {
         return item.product.toString() === newProduct.product.toString();
     });

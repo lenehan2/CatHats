@@ -39,7 +39,6 @@ router.post('/', function (req, res, next) {
             if (!req.user) return req.session.cart = {};
 
             req.user.cart = {};
-            req.user.orders.push(order._id);
             return req.user.save();
         })
         .then(() => res.status(201).json(order))
