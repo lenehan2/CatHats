@@ -1,9 +1,10 @@
 <div class="container">
     <div>
         <ul>
-            <li ng-repeat="product in products">
-                <p>{{ product.title }}</p>
-            </li>
+            <product-item
+                ng-repeat="product in products"
+                product="product">
+            </product-item>
         </ul>
 
     </div>
