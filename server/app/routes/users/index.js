@@ -3,6 +3,10 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Order = mongoose.model('Order');
 
+
+//Maybe we want to set req.foundUser to be null if we don't find
+//anything here?  Currently if you manually search for a users id, 
+//you can figure out if an ID is valid by whether or not it hangs.
 router.param('id',function(req,res,next,id){
 	User.findById(id)
 	.populate('orders')
@@ -19,20 +23,8 @@ router.param('id',function(req,res,next,id){
 	})
 })
 
-//GET ALL USERS
-router.get('/',function(req,res,next){
-	if(!req.user || !req.user.isAdmin){
-		var err = new Error('Nice Try Not-Admin! Now get the hell out of here!');
-		err.status = 403;
-		next(err);
-	} else {
-		User.find().exec()
-		.then(user => res.status(200).json(user))
-		.then(null,next)}
-});
-
 router.get('/:id',function(req,res,next){
-	res.status(200).json(req.user);
+	res.status(200).json(req.user); //<---Neat, prevents users from accessing other users
 });
 
 router.get('/:id/orders',function(req,res,next){
@@ -42,10 +34,12 @@ router.get('/:id/orders',function(req,res,next){
 });
 
 //UPDATE USER ACCOUNT
-router.put('/:id', function(req,res,next){
+//Does this allow a logged in user to change another users account?
+router.get('/test/:id', function(req,res,next){
 	if(!req.user){
         return res.status(403).end();  //NOT SURE IF WORKS!
     }
+    console.log(req.user)
     Object.keys(req.body).forEach(function(key){
     	req.foundUser[key] = req.body[key];
     });
@@ -54,7 +48,22 @@ router.put('/:id', function(req,res,next){
     .then(null, next);
 });
 
+//Allows an admin to update a users status to admin
+router.put('/admin/:id',function(req,res,next){
+	if(!req.user || !req.user.isAdmin){
+		return res.status(403).end();
+	}
+	User.findById(req.params.id)
+	.then(user => {
+		if(user){
+			user.isAdmin = true;
+		}
+		return user;
+	}).then(user => res.status(204).json(user))
+})
+
 router.post('/', function(req,res,next){
+	console.log("HERE",req.body)
 	User.create(req.body)
 		.then(user => {
 			req.logIn(user, function (loginErr) {
