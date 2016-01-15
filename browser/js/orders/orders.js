@@ -5,6 +5,7 @@ app.config(function ($stateProvider) {
         controller: 'OrdersCtrl',
         resolve: {
             orders: function (OrderFactory, $stateParams) {
+                console.log($stateParams.id)
                 return OrderFactory.getOrdersByUser($stateParams.id);
             }
         }
