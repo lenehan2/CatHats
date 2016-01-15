@@ -1,4 +1,4 @@
-app.factory('CartFactory', function($http) {
+app.factory('CartFactory', function($http,AuthService) {
 
 
     var cartFactoryObj = {
@@ -44,6 +44,57 @@ app.factory('CartFactory', function($http) {
         	});
         	console.log(newCart)
         	return cartFactoryObj.updateCart(newCart)
+        },
+        checkout: function(order){
+            //Nested promises? This doesn't feel right
+            //but I need to get the user first, then make
+            //a put request using that object
+           return cartFactoryObj.createValidOrderObject(order)
+            .then(validOrderObj =>{
+                return $http({
+                    method: 'POST',
+                    url: '/api/orders',
+                    data: validOrderObj
+                })
+            })
+            .then(response => response.data) 
+        },
+        createValidOrderObject: function(cartObj){
+            var validObj = {
+                products: []
+            }
+            //Add products to orderObj in correct form
+            cartObj.cart.forEach(function(item){
+                var orderItem = {
+                    product: item.product._id,
+                    price: item.product.price,
+                    quantity: item.quantity
+                }
+                validObj.products.push(orderItem);
+            })
+
+            //Add Payment Information
+            validObj.payment = cartObj.billing;
+            
+            //Add Shipping Information
+            validObj.shipping = cartObj.shipping;
+
+            
+            //Add Billing Address
+            if(cartObj.sameAddress){
+                validObj.payment.billingAddress = cartObj.shipping;
+            }else{
+                validObj.payment.billingAddress = cartObj.billingAddress;
+            }
+
+            //Add User Id
+            return AuthService.getLoggedInUser()
+            .then(user => {
+                if(user){
+                    validObj.user = user._id;
+                }
+                return validObj;
+            })
         }
     }
 

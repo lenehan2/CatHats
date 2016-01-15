@@ -5,7 +5,7 @@ var addressSchema = require('./address');
 var schema = new mongoose.Schema({
 
 	products: [orderItemSchema],
-    shipping: { addressSchema },
+    shipping: addressSchema ,
     payment: {
         creditCardNumber: {
             type: String,
@@ -14,7 +14,7 @@ var schema = new mongoose.Schema({
         },
         nameOnCard: { type: String },
         csv: { type: String },
-        billingAddress: { addressSchema }
+        billingAddress: addressSchema
     },
 	orderDate: {
 		type: Date,
