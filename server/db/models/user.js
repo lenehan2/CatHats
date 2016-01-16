@@ -63,6 +63,7 @@ schema.methods.findOrCreateCart = function(){
     })
 }
 
+//addToCart can take either a single item or an array of items
 schema.methods.addToCart = function (newItems) {
     if (!Array.isArray(newItems)) newItems = [newItems];
 
@@ -74,15 +75,6 @@ schema.methods.addToCart = function (newItems) {
         else this.cart.push(newItem);
     });
     return this.save();
-};
-
-schema.methods.populateCart = function () {
-    var user = this;
-
-    return Product.populate(user, { path: 'cart.product' }, function (err, user) {
-        if (err) throw err;
-        return user;
-    });
 };
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

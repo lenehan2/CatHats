@@ -2,26 +2,6 @@ var router = require('express').Router();
 var _ = require('lodash');
 var Order = require('mongoose').model('Order');
 var Product = require('mongoose').model('Product');
-//
-// schema.methods.populateCart = function () {
-//     var user = this;
-//
-//     return Product.populate(user, { path: 'cart.product' }, function (err, user) {
-//         if (err) throw err;
-//         return user;
-//     });
-// };
-
-
-var populateCart = function (cart, req) {
-    cart = _.cloneDeep(cart);
-
-    return Product.populate(cart, { path: 'product '}, function (err, cart) {
-        if (err) throw err;
-        console.log('cart :19 ', cart);
-        return cart;
-    });
-};
 
 var addToCart = function (newProduct, cart) {
     var existing = cart.find(function (item) {
@@ -43,17 +23,13 @@ router.use(function (req, res, next) {
 })
 
 router.get('/', function (req, res, next) {
-    if (!req.user) {
-        populateCart(req.cart)
-            .then(cart => res.status(200).json(cart))
-            .then(null, next);
-    } else {
-        console.log("req.cart", req.cart);
-        console.log("req.user.cart from get", req.user.cart);
-        req.user.populateCart()
-            .then(user => res.status(200).json(user.cart))
-            .then(null, next);
-    }
+    //when using req.session.cart, the cart must be cloned before its populated
+    //otherwise the population causes problems
+    var cart = req.user ? req.user.cart : _.cloneDeep(req.session.cart)
+
+    Product.populate(cart, { path: 'product' })
+        .then(cart => res.status(200).json(cart))
+        .then(null, next);
 });
 
 router.post('/',function(req,res,next){
