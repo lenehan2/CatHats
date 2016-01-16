@@ -94,7 +94,7 @@ router.post('/checkout', function (req, res, next) {
             order = newOrder;
             if (!req.user) return req.session.cart = {};
 
-            req.user.cart = {};
+            req.user.cart = [];
             return req.user.save();
         })
         .then(() => res.status(201).json(order))
