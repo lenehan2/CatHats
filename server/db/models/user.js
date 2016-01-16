@@ -57,6 +57,12 @@ schema.methods.addToCart = function (newItems) {
     return this.save();
 };
 
+//replaces the user's current cart with the new object passed in
+schema.methods.updateCart = function (newCart) {
+    this.cart = newCart;
+    return this.save();
+};
+
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
 var generateSalt = function() {

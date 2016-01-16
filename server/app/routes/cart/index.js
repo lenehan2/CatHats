@@ -2,23 +2,36 @@ var router = require('express').Router();
 var _ = require('lodash');
 var Order = require('mongoose').model('Order');
 var Product = require('mongoose').model('Product');
-
-var addToCart = function (newProduct, cart) {
-    var existing = cart.find(function (item) {
-        return item.product.toString() === newProduct.product.toString();
-    });
-    if (existing) existing.quantity += newProduct.quantity;
-    else cart.push(newProduct);
-};
+var Promise = require('bluebird');
+var userMethods = require('mongoose').model('User').schema.methods;
 
 router.use(function (req, res, next) {
-    if (req.user) {
-        req.cart = req.user.cart;
-        console.log("req.cart from use", req.cart);
-    } else {
-        req.session.cart = req.session.cart || [];
-        req.cart = req.session.cart;
-    }
+
+    // If there's no user logged in, prepare the session object
+    // w/ methods for managing the cart
+    //TODO see if we can do this when the session is initialized instead
+    if (req.user) return next();
+
+    // If there's no session cart, initialize the cart as an empty array
+    req.session.cart = req.session.cart || [];
+
+    // Give the session addToCart and updateCart methods that mimic
+    // what's on the User schema
+    // These methods are promisified so we can use them the same way
+    // as the User methods
+    req.session.addToCart = Promise.method(function (newCart) {
+        userMethods.addToCart.call(req.session, newCart);
+
+        // The req.session object must be clone so we can populate it with data
+        // from the db without messing it up for future requests
+        return _.cloneDeep(req.session);
+    });
+
+    req.session.updateCart = Promise.method(function (newCart) {
+        userMethods.updateCart.call(req.session, newCart);
+        return _.cloneDeep(req.session);
+    });
+
     next();
 })
 
@@ -33,31 +46,22 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/',function(req,res,next){
-    if (!req.user) {
-        addToCart(req.body, req.cart);
-        res.send(req.cart);
-        populateCart(req.cart)
-            .then(cart => res.status(201).json(cart));
-    } else {
-        req.user.addToCart(req.body)
-            .then(user => user.populateCart())
-            .then(user => res.status(201).json(user.cart))
-            .then(null, next)
-    }
+    var user = req.user ? req.user : req.session;
+    user.addToCart(req.body)
+        .then(user => user.cart)
+        .then(cart => Product.populate(cart, { path: 'product' }))
+        .then(cart => res.status(200).json(cart))
+        .then(null, next);
 });
 
 router.put('/', function (req, res, next) {
-    if (!req.user) {
-        req.session.cart = req.body;
-        populateCart(req.session.cart)
-            .then(cart => res.status(201).json(cart));
-    } else {
-        req.user.cart = req.body;
-        req.user.save()
-            .then(user => user.populateCart())
-            .then(user => res.status(201).json(user.cart))
-            .then(null, next)
-    }
+    var user = req.user ? req.user : req.session;
+    user.updateCart(req.body)
+        .then(user => user.cart)
+        .then(cart => Product.populate(cart, { path: 'product' }))
+        .then(cart => res.status(201).json(cart))
+        .then(null, next);
+
 });
 
 //CREATE NEW ORDER
@@ -68,7 +72,7 @@ router.post('/checkout', function (req, res, next) {
     Order.create(req.body)
         .then(newOrder => {
             order = newOrder;
-            if (!req.user) return req.session.cart = {};
+            if (!req.user) return req.session.cart = [];
 
             req.user.cart = [];
             return req.user.save();
