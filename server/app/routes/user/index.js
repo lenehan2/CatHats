@@ -5,47 +5,7 @@ var Order = mongoose.model('Order');
 
 //***REMOVED BASIC USERS ABILITY TO FIND OTHER USER BY ID****//
 
-
-//NON AUTHENTICATED USERS DON'T HAVE ACCESS TO THIS ROUTE
-router.use('/', function(req, res, next) {
-    if (!req.user) {
-        var err = new Error('Not Found');
-        err.status = 404
-        next(err)
-    }else{
-    	next()
-    }
-})
-
-//Get current User
-
-router.get('/', function(req, res, next) {
-    res.status(200).json(req.user); //<---Neat, prevents users from accessing other users
-});
-
-//GET CURRENT USERS ORDER HISTORY
-
-router.get('/orders', function(req, res, next) {
-    Order.find({
-            user: req.user.id
-        })
-        .then(orders => res.json(orders))
-        .then(null, next);
-});
-
-//UPDATE CURRENT USER ACCOUNT
-
-router.put('/', function(req, res, next) {
-    if (!req.user) {
-        return res.status(403).end(); //NOT SURE IF WORKS! <--May be taken care of with use up top
-    }
-    Object.keys(req.body).forEach(function(key) {
-        req.user[key] = req.body[key];
-    });
-    req.user.save()
-        .then(user => res.json(user))
-        .then(null, next);
-});
+//CREATE NEW USER
 
 router.post('/', function(req, res, next) {
 	//This ensures that a user can't make themselves an admin
@@ -73,5 +33,41 @@ router.post('/', function(req, res, next) {
         })
         .then(null, next);
 });
+
+//NON AUTHENTICATED USERS DON'T HAVE ACCESS TO THIS ROUTE
+router.use('/', function(req, res, next) {
+    if (!req.user) {
+        var err = new Error('Not Found');
+        err.status = 404
+        next(err)
+    }else{
+    	next()
+    }
+})
+
+//Get current User
+
+router.get('/', function(req, res, next) {
+    res.status(200).json(req.user); //<---Neat, prevents users from accessing other users
+});
+
+//UPDATE CURRENT USER ACCOUNT
+
+router.put('/', function(req, res, next) {
+    if (!req.user) {
+        return res.status(403).end(); //NOT SURE IF WORKS! <--May be taken care of with use up top
+    }
+    Object.keys(req.body).forEach(function(key) {
+        req.user[key] = req.body[key];
+    });
+    req.user.save()
+        .then(user => res.json(user))
+        .then(null, next);
+});
+
+
+
+router.use('/orders',require('../orders'))
+
 
 module.exports = router
