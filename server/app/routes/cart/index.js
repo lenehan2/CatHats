@@ -40,8 +40,8 @@ router.use(function (req, res, next) {
 })
 
 router.get('/', function (req, res, next) {
-    //when using req.session.cart, the cart must be cloned before its populated
-    //otherwise the population causes problems
+    // When using req.session.cart, the cart must be cloned before it's
+    // populated, otherwise the population causes problems
     var cart = req.user ? req.user.cart : _.cloneDeep(req.session.cart)
 
     Product.populate(cart, { path: 'product' })
