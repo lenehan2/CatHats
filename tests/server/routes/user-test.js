@@ -24,8 +24,6 @@ describe('Users Route', function () {
 
 	describe("Any user can create a new user, but no one can create an admin", function() {
 
-		beforeEach
-
 		var legalNewUserInfo = {
 			email: 'legal@legality.com',
 			password: 'straightAndNarrow'
