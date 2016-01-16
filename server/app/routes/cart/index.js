@@ -7,10 +7,10 @@ var userMethods = require('mongoose').model('User').schema.methods;
 
 router.use(function (req, res, next) {
 
+    if (req.user) return next();
     // If there's no user logged in, prepare the session object
     // w/ methods for managing the cart
     //TODO see if we can do this when the session is initialized instead
-    if (req.user) return next();
 
     // If there's no session cart, initialize the cart as an empty array
     req.session.cart = req.session.cart || [];
