@@ -19,18 +19,22 @@ router.use(function (req, res, next) {
     // what's on the User schema
     // These methods are promisified so we can use them the same way
     // as the User methods
-    req.session.addToCart = Promise.method(function (newCart) {
-        userMethods.addToCart.call(req.session, newCart);
+    if (!req.session.addToCart) {
+        req.session.addToCart = Promise.method(function (newCart) {
+            userMethods.addToCart.call(req.session, newCart);
 
-        // The req.session object must be clone so we can populate it with data
-        // from the db without messing it up for future requests
-        return _.cloneDeep(req.session);
-    });
+            // The req.session object must be clone so we can populate it with data
+            // from the db without messing it up for future requests
+            return _.cloneDeep(req.session);
+        });
+    }
 
-    req.session.updateCart = Promise.method(function (newCart) {
-        userMethods.updateCart.call(req.session, newCart);
-        return _.cloneDeep(req.session);
-    });
+    if (!req.session.updateCart) {
+        req.session.updateCart = Promise.method(function (newCart) {
+            userMethods.updateCart.call(req.session, newCart);
+            return _.cloneDeep(req.session);
+        });
+    }
 
     next();
 })
