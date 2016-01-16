@@ -40,6 +40,21 @@ app.directive('orderItem', function () {
             order: '=',
             full: '='
         },
-        templateUrl: 'js/orders/order-item.html'
+        templateUrl: 'js/orders/order-item.html',
+        link: function (scope) {
+            scope.totalPrice = scope.order.products.reduce(function (acc, curr) {
+                return acc + (curr.price * curr.quantity);
+            }, 0);
+        }
     }
-})
+});
+
+app.directive('orderProduct', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            item: '='
+        },
+        templateUrl: 'js/orders/order-product.html'
+    }
+});

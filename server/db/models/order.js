@@ -26,8 +26,8 @@ var schema = new mongoose.Schema({
 	},
 	status: {
 		type: String,
-		enum: ['created', 'processing', 'cancelled', 'completed'],
-        default: 'created'
+		enum: ['Created', 'Processing', 'Cancelled', 'Completed'],
+        default: 'Created'
 	}
 });
 
