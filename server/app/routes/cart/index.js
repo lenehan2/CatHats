@@ -23,7 +23,7 @@ router.use(function (req, res, next) {
         req.session.addToCart = Promise.method(function (newCart) {
             userMethods.addToCart.call(req.session, newCart);
 
-            // The req.session object must be clone so we can populate it with data
+            // The req.session object must be cloned so we can populate it with data
             // from the db without messing it up for future requests
             return _.cloneDeep(req.session);
         });
