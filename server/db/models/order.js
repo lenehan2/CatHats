@@ -16,7 +16,7 @@ var schema = new mongoose.Schema({
         csv: { type: String },
         billingAddress: addressSchema
     },
-	orderDate: {
+	date: {
 		type: Date,
         default: Date.now
 	},
