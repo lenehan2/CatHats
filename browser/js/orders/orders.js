@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
         resolve: {
             orders: function (OrderFactory, $stateParams) {
                 console.log($stateParams.id)
-                return OrderFactory.getOrdersByUser($stateParams.id);
+                return OrderFactory.getCurrentUsersOrders();
             }
         }
     });

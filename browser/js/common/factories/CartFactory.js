@@ -53,7 +53,7 @@ app.factory('CartFactory', function($http,AuthService) {
             .then(validOrderObj =>{
                 return $http({
                     method: 'POST',
-                    url: '/api/orders',
+                    url: '/api/cart/checkout',
                     data: validOrderObj
                 })
             })
