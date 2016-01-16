@@ -1,6 +1,6 @@
 <h3 ng-show="!full">Confirmation Number: <a ui-sref="order({ id: order._id })">{{ order._id }}</a></h3>
 <h3 ng-show="full">Order number {{ order._id }}</a></h3>
-<h3>Date: {{ order.orderDate | date : 'short' }}</h3>
+<h3>Date: {{ order.date | date : 'short' }}</h3>
 <h3>Status: {{ order.status }}</h3>
 <div ng-show="full">
     <div ng-repeat="product in order.products">
@@ -9,5 +9,7 @@
         <h3>Price: {{product.price}}
     </div>
     <h3>Payment: {{ order.payment.creditCardNumber }}</h3>
-    <h3>Shipping: {{ order.shipping.streetAddress }}, {{ order.shipping.city }} {{ order.shipping.zip }}</h3>
+    <h3>Shipping:</h3>
+    <p>{{ order.shipping.streetAddress }}</p>
+    <p>{{ order.shipping.city }}, {{ order.shipping.state }} {{ order.shipping.zip }}</p>
 </div>
