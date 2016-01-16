@@ -9,5 +9,7 @@
         <h3>Price: {{product.price}}
     </div>
     <h3>Payment: {{ order.payment.creditCardNumber }}</h3>
-    <h3>Shipping: {{ order.shipping.streetAddress }}, {{ order.shipping.city }} {{ order.shipping.zip }}</h3>
+    <h3>Shipping:</h3>
+    <p>{{ order.shipping.streetAddress }}</p>
+    <p>{{ order.shipping.city }}, {{ order.shipping.state }} {{ order.shipping.zip }}</p>
 </div>
