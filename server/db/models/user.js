@@ -43,62 +43,24 @@ schema.methods.sanitize = function() {
     return _.omit(this.toJSON(), ['password', 'salt']);
 };
 
-schema.methods.findOrCreateCart = function(){
-    var self = this;
+//addToCart can take either a single item or an array of items
+schema.methods.addToCart = function (newItems) {
+    if (!Array.isArray(newItems)) newItems = [newItems];
 
-    return this.populate('orders')
-    .then(function(user){
-        var cart = user.orders.find(function(order){
-            return !order.ordered;
-        })
-        if(cart){
-            return cart;
-        }else{
-            Order.create({})
-            .then(function(cart){
-                self.orders.push(cart._id);
-                return cart;
-            })
-        }
-    })
-}
-
-schema.methods.syncCart = function(productArr){
-
-    var self = this;
-
-    productArr.forEach(function(newProduct){
-        var existing = self.cart.find(function (item) {
-            return item.product.toString() === newProduct.product.toString();
+    newItems.forEach(newItem => {
+         var existing = this.cart.find(cartItem => {
+            return cartItem.product.toString() === newItem.product.toString();
         });
-        if (existing) existing.quantity += newProduct.quantity;
-        else self.cart.push(newProduct);
-    })
-
-    return this.save();
-
-}
-
-schema.methods.addToCart = function (newProduct) {
-
-    var existing = this.cart.find(function (item) {
-        return item.product.toString() === newProduct.product.toString();
+        if (existing) existing.quantity += newItem.quantity;
+        else this.cart.push(newItem);
     });
-    if (existing) existing.quantity += newProduct.quantity;
-    else this.cart.push(newProduct);
-    // console.log("newProduct", newProduct);
-    // console.log("typeof newProduct.id", typeof newProduct.id);
-    // console.log("this.cart", this.cart)
     return this.save();
 };
 
-schema.methods.populateCart = function () {
-    var user = this;
-
-    return Product.populate(user, { path: 'cart.product' }, function (err, user) {
-        if (err) throw err;
-        return user;
-    });
+//replaces the user's current cart with the new object passed in
+schema.methods.updateCart = function (newCart) {
+    this.cart = newCart;
+    return this.save();
 };
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
