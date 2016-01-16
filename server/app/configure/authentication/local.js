@@ -4,6 +4,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Promise = require('bluebird');
 
 module.exports = function (app) {
 
@@ -43,19 +44,33 @@ module.exports = function (app) {
             req.logIn(user, function (loginErr) {
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
-                if(req.session.cart){
-                    req.user.syncCart(req.session.cart)
-                    .then(function(){
-                        req.session.cart = null;
-                        res.status(200).send({
-                            user: user.sanitize()
-                        });
-                    })
+
+                if (req.session.cart) {
+                    req.user.addToCart(req.session.cart)
+                        .then(function (user) {
+                            req.session.cart = null;
+                            res.status(200).json({
+                                user: user.sanitize
+                            })
+                        })
                 } else {
-                    res.status(200).send({
-                        user: user.sanitize()
+                    res.satus(200).send({
+                        user: user.sanitize
                     });
                 }
+                // if(req.session.cart){
+                //     req.user.syncCart(req.session.cart)
+                //     .then(function(){
+                //         req.session.cart = null;
+                //         res.status(200).send({
+                //             user: user.sanitize()
+                //         });
+                //     })
+                // } else {
+                //     res.status(200).send({
+                //         user: user.sanitize()
+                //     });
+                // }
             });
 
         };

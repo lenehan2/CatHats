@@ -63,32 +63,16 @@ schema.methods.findOrCreateCart = function(){
     })
 }
 
-schema.methods.syncCart = function(productArr){
+schema.methods.addToCart = function (newItems) {
+    if (!Array.isArray(newItems)) newItems = [newItems];
 
-    var self = this;
-
-    productArr.forEach(function(newProduct){
-        var existing = self.cart.find(function (item) {
-            return item.product.toString() === newProduct.product.toString();
+    newItems.forEach(newItem => {
+         var existing = this.cart.find(cartItem => {
+            return cartItem.product.toString() === newItem.product.toString();
         });
-        if (existing) existing.quantity += newProduct.quantity;
-        else self.cart.push(newProduct);
-    })
-
-    return this.save();
-
-}
-
-schema.methods.addToCart = function (newProduct) {
-
-    var existing = this.cart.find(function (item) {
-        return item.product.toString() === newProduct.product.toString();
+        if (existing) existing.quantity += newItem.quantity;
+        else this.cart.push(newItem);
     });
-    if (existing) existing.quantity += newProduct.quantity;
-    else this.cart.push(newProduct);
-    // console.log("newProduct", newProduct);
-    // console.log("typeof newProduct.id", typeof newProduct.id);
-    // console.log("this.cart", this.cart)
     return this.save();
 };
 
