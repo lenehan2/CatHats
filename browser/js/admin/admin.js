@@ -7,6 +7,9 @@ app.config(function ($stateProvider) {
             user: function (AuthService) {
                 return AuthService.getLoggedInUser();
             }
+        },
+        data: {
+            adminAuthenticate: true
         }
     });
 
