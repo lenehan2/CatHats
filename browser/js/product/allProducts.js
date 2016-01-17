@@ -1,50 +1,22 @@
 app.config(function($stateProvider){
 	$stateProvider.state('products', {
-		url: '/products',
-		abstract: true,
-		template: '<ui-view/>',
-	});
-
-	$stateProvider.state('products.all', {
-		url: '',
+		url: '/products/?title?categories',
 		templateUrl: 'js/product/product-list.html',
 		resolve: {
-			products: function(ProductFactory){
-				return ProductFactory.getProducts()
+			products: function (ProductFactory, $stateParams) {
+				return ProductFactory.getProducts($stateParams);
 			}
 		},
-		controller: function ($scope, products) {
-			$scope.products = products;
-			$scope.$parent.categories = products.reduce((acc, curr) => {
-				return acc.concat(
-					curr.categories.filter(
-						cat => acc.indexOf(cat) === -1
-					)
-				)
-			}, [])
-		}
-	});
-
-    $stateProvider.state('products.byCategory', {
-        url: '/?category',
-        templateUrl: 'js/product/product-list.html',
-        resolve: {
-            products: function (ProductFactory, $stateParams) {
-                return ProductFactory.getByCategory($stateParams.category);
-            }
-        },
-        controller: function ($scope, products) {
-            $scope.products = products;
-        }
-    });
+		controller: 'ProductsCtrl'
+	})
 });
-//
-// app.controller('ProductsCtrl', function($scope, products){
-// 		$scope.products = products;
-// 		$scope.$parent.categories = products.reduce((acc, curr) => {
-// 			return acc.concat(
-// 				curr.categories.filter(cat => acc.indexOf(cat) === -1)
-// 			)
-// 		}, [])
-//
-// })
+
+app.controller('ProductsCtrl', function($scope, products){
+		$scope.products = products;
+		$scope.categories = products.reduce((acc, curr) => {
+			return acc.concat(
+				curr.categories.filter(cat => acc.indexOf(cat) === -1)
+			)
+		}, [])
+
+})
