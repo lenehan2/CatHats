@@ -10,7 +10,8 @@ var clearDB = require('mocha-mongoose')(dbURI);
 
 var supertest = require('supertest');
 var app = require('../../../server/app');
-describe('Product Route', function() {
+
+xdescribe('Product Route', function() {
 
     var productId;
     var admin;
