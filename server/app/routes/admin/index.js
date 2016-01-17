@@ -9,7 +9,6 @@ of a specific users orders
 
 admin/orders -> can update status of specific order
 ***/
-//CHRIS: BLOCKS NON-ADMINS FROM ACCESSING THIS ROUTE
 router.use(function(req,res,next){
 	if(!req.user || !req.user.isAdmin){
 		var err = new Error('Nice Try Not-Admin! Now get the hell out of here!');
@@ -20,7 +19,6 @@ router.use(function(req,res,next){
 	}
 })
 
-//CHRIS: FIND A USER BY ID AND SAVE THEM TO THE REQ OBJECT
 router.param('id',function(req,res,next,id){
 	User.findById(id)
 	.populate('orders')

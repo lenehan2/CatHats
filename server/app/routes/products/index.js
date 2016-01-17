@@ -19,6 +19,7 @@ router.param('id', function (req, res, next, id) {
     .then(null, next);
 });
 
+//GET ALL
 router.get('/', function (req, res, next) {
     Product.find(req.query)
         .then(products => res.json(products))
