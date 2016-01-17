@@ -14,18 +14,36 @@
             ng-model="product.title">
         </h3>
 
-        <p
-            contenteditable="{{editMode}}"
-            ng-model="product.price">
+        <p ng-hide="editMode">
             {{product.price / 100 | currency }}
         </p>
 
-        <p>
+        <div ng-show="editMode">
+            <p>Price (in cents):</p>
+            <p
+                contenteditable="{{editMode}}"
+                ng-model="product.price">
+                {{product.price}}
+            </p>
+        </div>
+
+        <p ng-hide="editMode">
             <span ng-repeat="category in product.categories">
                 <span ng-if="$index > 0">, </span>
                 {{category}}
             </span>
         </p>
+
+        <!-- Good reason to make a category schema in db -->
+        <div ng-show="editMode">
+            <div ng-repeat="category in ['Costumes', 'Formal', 'Seasonal', 'Outerware']">
+                <input
+                    type="checkbox"
+                    ng-value="category"
+                    ng-checked="product.categories.indexOf(category) !== -1">
+                {{category}}
+            </div>
+        </div>
 
         <p
             ng-if="full"
@@ -47,7 +65,7 @@
 
         <button
             ng-click="addToCart(product._id)"
-            ng-hide="editMode"
+            ng-hide="canEdit"
             class="btn">
             Add to Cart
         </button>
