@@ -6,7 +6,7 @@ var User = mongoose.model('User');
 var expect = require('chai').expect; //?Q: is mocha available globally? can you not make chai available globally?
 
 var dbURI = 'monodb://localhost:27017/testingDB';
-var clearDB = require('mocha-mongoose')(dbUri);	//?Q: How is this working?
+var clearDB = require('mocha-mongoose')(dbURI);	//?Q: How is this working?
 
 var supertest = require('supertest');
 var app = require('../../../server/app');
