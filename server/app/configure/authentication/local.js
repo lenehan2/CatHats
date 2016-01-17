@@ -44,6 +44,7 @@ module.exports = function (app) {
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
                 if(req.session.cart){
+                    console.log("REQ.SESSION: ",Boolean(req.session.cart))
                     req.user.syncCart(req.session.cart)
                     .then(function(){
                         req.session.cart = null;

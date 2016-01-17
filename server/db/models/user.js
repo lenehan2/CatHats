@@ -2,7 +2,7 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var _ = require('lodash');
-var Order = mongoose.model('Order');
+// var Order = mongoose.model('Order');
 var Product = mongoose.model('Product');
 var itemSchema = require('./item');
 
@@ -43,30 +43,29 @@ schema.methods.sanitize = function() {
     return _.omit(this.toJSON(), ['password', 'salt']);
 };
 
-schema.methods.findOrCreateCart = function(){
-    var self = this;
+// schema.methods.findOrCreateCart = function(){
+//     var self = this;
 
-    return this.populate('orders')
-    .then(function(user){
-        var cart = user.orders.find(function(order){
-            return !order.ordered;
-        })
-        if(cart){
-            return cart;
-        }else{
-            Order.create({})
-            .then(function(cart){
-                self.orders.push(cart._id);
-                return cart;
-            })
-        }
-    })
-}
+//     return this.populate('orders')
+//     .then(function(user){
+//         var cart = user.orders.find(function(order){
+//             return !order.ordered;
+//         })
+//         if(cart){
+//             return cart;
+//         }else{
+//             Order.create({})
+//             .then(function(cart){
+//                 self.orders.push(cart._id);
+//                 return cart;
+//             })
+//         }
+//     })
+// }
 
 schema.methods.syncCart = function(productArr){
 
     var self = this;
-
     productArr.forEach(function(newProduct){
         var existing = self.cart.find(function (item) {
             return item.product.toString() === newProduct.product.toString();

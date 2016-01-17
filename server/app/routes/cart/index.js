@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var _ = require('lodash');
+var fs = require('fs');
 var Order = require('mongoose').model('Order');
 var Product = require('mongoose').model('Product');
 //
@@ -92,9 +93,10 @@ router.post('/checkout', function (req, res, next) {
     Order.create(req.body)
         .then(newOrder => {
             order = newOrder;
-            if (!req.user) return req.session.cart = {};
-
+            if (!req.user) return req.session.cart = [];
+// to_name, to_email, from_name, from_email, subject, message_html
             req.user.cart = [];
+            // Mandrill.sendEmail('User','john.m.lenehan@gmail.com','CatHats','testfullstackproject@gmail.com','Order Confirmation',messageTemplate)
             return req.user.save();
         })
         .then(() => res.status(201).json(order))
