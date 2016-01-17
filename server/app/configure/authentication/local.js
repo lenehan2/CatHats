@@ -54,7 +54,7 @@ module.exports = function (app) {
                             })
                         })
                 } else {
-                    res.satus(200).send({
+                    res.status(200).send({
                         user: user.sanitize
                     });
                 }
