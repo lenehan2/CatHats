@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var _ = require('lodash');
+var fs = require('fs');
 var Order = require('mongoose').model('Order');
 var Product = require('mongoose').model('Product');
 var Promise = require('bluebird');
@@ -79,6 +80,7 @@ router.post('/checkout', function (req, res, next) {
             if (!req.user) return req.session.cart = [];
 
             req.user.cart = [];
+            // Mandrill.sendEmail('User','john.m.lenehan@gmail.com','CatHats','testfullstackproject@gmail.com','Order Confirmation',messageTemplate)
             return req.user.save();
         })
         .then(() => res.status(201).json(order))
