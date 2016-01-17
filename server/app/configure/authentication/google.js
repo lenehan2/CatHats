@@ -41,6 +41,7 @@ module.exports = function (app) {
 
     passport.use(new GoogleStrategy(googleCredentials, verifyCallback));
 
+    //this is where the user requests login through google
     app.get('/auth/google', passport.authenticate('google', {
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
@@ -48,8 +49,9 @@ module.exports = function (app) {
         ]
     }));
 
+    //this is where google redirects our user after they've been authenticated
     app.get('/auth/google/callback',
-        passport.authenticate('google', { failureRedirect: '/login' }),
+        passport.authenticate('google', { failureRedirect: '/login' }), //where is the successRedirect?
         function (req, res) {
             res.redirect('/');
         });
