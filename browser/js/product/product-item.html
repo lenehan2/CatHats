@@ -1,22 +1,91 @@
 <div class="row">
+    <h1 ng-show="editMode">EDITING</h1>
     <div class="col-xs-4">
         <img ng-src="{{product.imageUrl}}" class="img-responsive">
+        <div ng-show="editMode">
+            Image Url: <span contenteditable="{{editMode}}" ng-model="product.imageUrl"></span>
+        </div>
     </div>
+
+
     <div class="col-xs-8">
-        <h3>{{product.title}}</h3>
-        <p>{{product.price / 100 | currency }}</p>
-        <p>
+        <h3
+            contenteditable="{{editMode}}"
+            ng-model="product.title">
+        </h3>
+
+        <p ng-hide="editMode">
+            {{product.price / 100 | currency }}
+        </p>
+
+        <div ng-show="editMode">
+            <p>Price (in cents):</p>
+            <p
+                contenteditable="{{editMode}}"
+                ng-model="product.price">
+                {{product.price}}
+            </p>
+        </div>
+
+        <p ng-hide="editMode">
             <span ng-repeat="category in product.categories">
                 <span ng-if="$index > 0">, </span>
                 {{category}}
             </span>
         </p>
-        <p ng-if="full">{{product.description}}</p>
-        <a ui-sref="singleProduct({ productId: product._id })" ng-if="!full">
+
+        <!-- Good reason to make a category schema in db -->
+        <div ng-show="editMode">
+            <div ng-repeat="category in ['Costumes', 'Formal', 'Seasonal', 'Outerware']">
+                <input
+                    type="checkbox"
+                    ng-value="category"
+                    ng-checked="product.categories.indexOf(category) !== -1">
+                {{category}}
+            </div>
+        </div>
+
+        <p
+            ng-if="full"
+            contenteditable="{{editMode}}"
+            ng-model="product.description">
+        </p>
+
+        <a
+            ui-sref="singleProduct({ productId: product._id })"
+            ng-if="!full">
             <p>More Info</p>
         </a>
-        <button ng-click="addToCart(product._id)" class="btn">Add to Cart</button>
+
+        <a
+            ui-sref="admin.singleProduct({ id: product._id })"
+            ng-if="!full && canEdit">
+            <p>Edit</p>
+        </a>
+
+        <button
+            ng-click="addToCart(product._id)"
+            ng-hide="canEdit"
+            class="btn">
+            Add to Cart
+        </button>
+        </br>
+
+        <button
+            ng-click="toggleEditMode()"
+            ng-if="full && canEdit"
+            class="btn">
+            <span ng-hide="editMode">Edit</span>
+            <span ng-show="editMode">Cancel</span>
+        </button>
+        <button
+            ng-click="save(product)"
+            ng-show="editMode"
+            class="btn btn-primary">
+            Save
+        </button>
     </div>
 
 </div>
+
 <h3 ng-if="full">MAKE A REVIEW DIRECTIVE AND PUT IT HERE</h3>

@@ -6,13 +6,14 @@ app.config(function($stateProvider){
 		resolve: {
 			product: function(ProductFactory, $stateParams){
 				return ProductFactory.getSingleProduct($stateParams.productId);
+			},
+			user: function(AuthService) {
+				return AuthService.getLoggedInUser();
 			}
 		}
 	});
 });
 
-app.controller('singleProductCtrl', function($scope, product){
-
+app.controller('singleProductCtrl', function($scope, product, user){
 		$scope.product = product;
-
-})
+});

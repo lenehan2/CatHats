@@ -27,6 +27,16 @@ app.factory('ProductFactory',function($http){
 			})
 			.then(response => response.data)
 			.then(null, console.error.bind(console))
+		},
+
+		updateProduct: function (id, newData) {
+			return $http({
+				method: 'PUT',
+				url: '/api/products/' + id,
+				data: newData
+			})
+			.then(res => res.data)
+			.then(null, console.error.bind(console));
 		}
 	}
 })
