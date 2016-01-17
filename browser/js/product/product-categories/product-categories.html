@@ -6,8 +6,13 @@
     >
     <ul class="category-list">
         <li ng-repeat="category in categories | filter : query">
-            <a ui-sref="products.byCategory({ category: category })">
+            <a ui-sref="products({ categories: category })">
                 {{category}}
+            </a>
+        </li>
+        <li>
+            <a ui-sref="products({ categories: null, title: null })">
+                All
             </a>
         </li>
     </ul>

@@ -1,5 +1,7 @@
-<div>
-    <div ng-repeat="order in orders">
-        <order-item order="order"></order-item>
+<div class="container">
+    <div ng-repeat="order in orders" class="card">
+        <a ui-sref="order({ id: order._id})">
+            <order-item order="order"></order-item>
+        </a>
     </div>
 </div>
