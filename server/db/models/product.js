@@ -30,7 +30,11 @@ var schema = new mongoose.Schema({
 	reviews: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Review'
-	}]
+	}],
+	featured: {
+		type: Boolean, 
+		default: false
+	}
 });
 
 mongoose.model('Product', schema);

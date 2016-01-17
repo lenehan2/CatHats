@@ -1,4 +1,10 @@
 <section id="home">
-    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting>
+<div class="header">
+	<h3>Featured This Week!</h3>
+</div>
+    <div class="container featured">
+        <div ng-repeat="product in featured" class="card col-xs-6 col-sm-4 col-md-3">
+            <product-item product="product" full="false" />
+        </div>
+    </div>
 </section>

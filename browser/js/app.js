@@ -16,17 +16,20 @@ app.run(function ($rootScope, AuthService, $state) {
         return state.data && state.data.authenticate;
     };
 
+    var destinationStateRequiresAdmin = function(state){
+        return state.data && state.data.adminAuthenticate;
+    }
     // $stateChangeStart is an event fired
     // whenever the process of changing a state begins.
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 
-        if (!destinationStateRequiresAuth(toState)) {
-            // The destination state does not require authentication
+        if (!destinationStateRequiresAdmin(toState)&&!destinationStateRequiresAuth(toState)) {
+            // The destination state does not require authentication or Admin status
             // Short circuit with return.
             return;
         }
 
-        if (AuthService.isAuthenticated()) {
+        if (AuthService.isAuthenticated()&&AuthService.isAdmin()) {
             // The user is authenticated.
             // Short circuit with return.
             return;
@@ -39,10 +42,19 @@ app.run(function ($rootScope, AuthService, $state) {
             // If a user is retrieved, then renavigate to the destination
             // (the second time, AuthService.isAuthenticated() will work)
             // otherwise, if no user is logged in, go to "login" state.
-            if (user) {
-                $state.go(toState.name, toParams);
-            } else {
-                $state.go('login');
+            if(destinationStateRequiresAdmin(toState)){
+                if(user && user.isAdmin){
+                    $state.go(toState.name, toParams)
+                }else{
+                    $state.go('home')
+                }
+            }else{
+                if (user) {
+                    $state.go(toState.name, toParams);
+                } else {
+                    $state.go('login');
+                }
+                
             }
         });
 
