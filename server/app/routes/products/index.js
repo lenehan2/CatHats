@@ -20,7 +20,15 @@ router.param('id', function (req, res, next, id) {
 });
 
 router.get('/', function (req, res, next) {
+
+    //convert title query to regex so it can get partial matches
+    if (req.query.title) req.query.title = new RegExp(req.query.title, 'gi');
+
     Product.find(req.query)
+        .then(products => {
+            console.log(products);
+            return products;
+        })
         .then(products => res.json(products))
         .then(null, next);
 });

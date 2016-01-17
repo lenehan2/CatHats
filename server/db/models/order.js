@@ -26,19 +26,19 @@ var schema = new mongoose.Schema({
         },
         billingAddress: addressSchema
     },
-    orderDate: {
-        type: Date,
+	date: {
+		type: Date,
         default: Date.now
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    status: {
-        type: String,
-        enum: ['created', 'processing', 'cancelled', 'completed'],
-        default: 'created'
-    }
+	},
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	status: {
+		type: String,
+		enum: ['Created', 'Processing', 'Cancelled', 'Completed'],
+        default: 'Created'
+	}
 });
 
 schema.post('save', function() {

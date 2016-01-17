@@ -1,10 +1,12 @@
 app.factory('ProductFactory',function($http){
 
 	return {
-		getProducts: function(){
+		getProducts: function(params){
+			params = params || {};
 			return $http({
 				method: 'GET',
-				url: '/api/products'
+				url: '/api/products',
+				params: params
 			}).then(response => response.data)
 		},
 
