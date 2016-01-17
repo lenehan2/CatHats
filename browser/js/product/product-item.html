@@ -1,22 +1,62 @@
 <div class="row">
+    <h1 ng-show="editMode">EDITING</h1>
     <div class="col-xs-4">
         <img ng-src="{{product.imageUrl}}" class="img-responsive">
     </div>
     <div class="col-xs-8">
-        <h3>{{product.title}}</h3>
-        <p>{{product.price / 100 | currency }}</p>
+        <h3
+            contenteditable="{{editMode}}"
+            ng-model="product.title">
+        </h3>
+
+        <p
+            contenteditable="{{editMode}}"
+            ng-model="product.price">
+            {{product.price / 100 | currency }}
+        </p>
+
         <p>
             <span ng-repeat="category in product.categories">
                 <span ng-if="$index > 0">, </span>
                 {{category}}
             </span>
         </p>
-        <p ng-if="full">{{product.description}}</p>
-        <a ui-sref="singleProduct({ productId: product._id })" ng-if="!full">
+
+        <p
+            ng-if="full"
+            contenteditable="{{editMode}}"
+            ng-model="product.description">
+        </p>
+
+        <a
+            ui-sref="singleProduct({ productId: product._id })"
+            ng-if="!full">
             <p>More Info</p>
         </a>
-        <button ng-click="addToCart(product._id)" class="btn">Add to Cart</button>
+
+        <button
+            ng-click="addToCart(product._id)"
+            ng-hide="editMode"
+            class="btn">
+            Add to Cart
+        </button>
+        </br>
+
+        <button
+            ng-click="toggleEditMode()"
+            ng-show="isAdmin"
+            class="btn">
+            <span ng-hide="editMode">Edit</span>
+            <span ng-show="editMode">Cancel</span>
+        </button>
+        <button
+            ng-click="save(product)"
+            ng-show="editMode"
+            class="btn btn-primary">
+            Save
+        </button>
     </div>
 
 </div>
+
 <h3 ng-if="full">MAKE A REVIEW DIRECTIVE AND PUT IT HERE</h3>
