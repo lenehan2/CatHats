@@ -1,10 +1,6 @@
 <div class="container">
     <product-categories categories="categories"></product-categories>
-    <div class="col-xs-12">
-        <product-item
-            ng-repeat="product in products"
-            product="product"
-            full="false">
-        </product-item>
+    <div ng-repeat="product in products" class="card col-xs-12">
+        <product-item product="product" full="false" />
     </div>
 </div>
