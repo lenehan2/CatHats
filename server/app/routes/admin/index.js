@@ -59,6 +59,14 @@ router.get('/users', function(req, res, next) {
         .then(null, next)
 })
 
+//GET ALL ORDERS AS ADMIN
+
+router.get('/orders', function(req, res, next){
+	Order.find().exec()
+		.then(orders => res.status(200).json(orders))
+		.then(null, next)
+})
+
 //GET A SPECIFIC USER AS ADMIN 
 
 router.get('/users/:id',function(req, res, next){
