@@ -38,7 +38,8 @@ app.directive('orderItem', function () {
         restrict: 'E',
         scope: {
             order: '=',
-            full: '='
+            full: '=',
+            cancel: '='
         },
         templateUrl: 'js/orders/order-item.html',
         link: function (scope) {
