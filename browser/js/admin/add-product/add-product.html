@@ -1,0 +1,42 @@
+<div class="container">
+    <h3>Add a New Product</h3>
+    <form ng-submit="save(newProduct)">
+        <div class="form-group">
+            <label for="title">Product Title:</label>
+            <input type="text" ng-model="newProduct.title" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea ng-model="newProduct.description" class="form-control"></textarea>
+        </div>
+
+        <!-- TODO combine with the same that happens in the product-item directive? -->
+        <div class="form-group">
+            <label for="categories">Categories:</label>
+            <edit-product-categories
+                product="newProduct"
+                categories="['Costumes', 'Formal', 'Seasonal', 'Outerware']">
+            </edit-product-categories>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price (in cents):</label>
+            <input ng-model="newProduct.price" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="inventory">Inventory Count:</label>
+            <input ng-model="newProduct.inventory" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="imageUrl">Image URL:</label>
+            <input ng-model="newProduct.imageUrl" class="form-control">
+        </div>
+        <div>
+            <img ng-src="{{newProduct.imageUrl}}">
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>

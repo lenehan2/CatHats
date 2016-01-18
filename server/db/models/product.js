@@ -25,14 +25,15 @@ var schema = new mongoose.Schema({
 		min: 0
 	},
 	imageUrl: {
-		type: String
+		type: String,
+        default: 'http://haliaxservice.com/admin/collection/job/job_020715140720_default.jpeg'
 	},
 	reviews: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Review'
 	}],
 	featured: {
-		type: Boolean, 
+		type: Boolean,
 		default: false
 	}
 });
