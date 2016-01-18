@@ -1,0 +1,13 @@
+<form ng-submit="searchOrders(search.param,search.title)">
+    <input
+    type="text"
+    ng-model="search.title"
+    placeholder="Search for a order..."
+    >
+    <select ng-model="search.param">
+    	<option ng-repeat="item in items" value= '{{item.value}}'>{{item.label}}</option>
+    </select>
+    <button type="submit" class="btn btn-info">
+        <span class="glyphicon glyphicon-search"></span>
+    </button>
+</form>
