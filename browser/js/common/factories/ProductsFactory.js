@@ -40,7 +40,6 @@ app.factory('ProductFactory',function($http){
 		},
 
         addProduct: function (newProduct) {
-            console.log('in factory: ', newProduct)
             return $http({
                 method: 'POST',
                 url: '/api/products',
