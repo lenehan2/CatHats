@@ -18,9 +18,10 @@ app.config(function($stateProvider){
 });
 
 
-app.controller('singleProductCtrl', function($scope, reviews, product, $state, ProductFactory){
+app.controller('singleProductCtrl', function($scope, reviews, product, user, $state, ProductFactory){
 		$scope.reviews = reviews;
 		$scope.product = product;
 		$scope.averageRating = ProductFactory.getAvgRating(reviews);
+		$scope.user = user;
 });
 

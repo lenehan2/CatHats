@@ -36,13 +36,23 @@ router.get('/', function (req, res, next) {
 
 //ADD REVIEW TO PRODUCT
 router.post('/:id/reviews', function(req, res, next){
-    Review.create(req.body)
+    req.body.user = req.user._id;
+    Review.findOne({user: req.body.user, product: req.params.id})
+    .then(function(review){
+        if(review){
+            var err = new Error("You already posted a review, ya dingus!");
+            err.status = 401;
+            return next(err);
+        }
+        Review.create(req.body)
         .then(product => res.json(product))
         .then(null, next);
+    })
 });
 
 router.get('/:id/reviews', function(req, res, next){
     Review.find({product: req.params.id })
+    .populate("user")
     .then(reviews => res.json(reviews))
     .then(null, next);
 });
