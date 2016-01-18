@@ -26,6 +26,45 @@ app.config(function ($stateProvider) {
         }
     });
 
+    $stateProvider.state('admin.singleProduct', {
+        url: '/products/:id',
+        templateUrl: 'js/admin/edit-product.html',
+        resolve: {
+            product: function (ProductFactory, $stateParams) {
+                return ProductFactory.getSingleProduct($stateParams.id);
+            }
+        },
+        controller: function ($scope, product) {
+            $scope.product = product;
+        }
+    })
+
+    $stateProvider.state('admin.users', {
+        url: '/users',
+        templateUrl: 'js/admin/admin-users.html',
+        resolve: {
+            users: function (UserFactory) {
+                return UserFactory.fetchAll();
+            }
+        },
+        controller: function ($scope, users) {
+            $scope.users = users;
+        }
+    });
+
+    $stateProvider.state('admin.singleUser', {
+        url: '/users/:id',
+        templateUrl: '/js/admin/edit-user.html',
+        resolve: {
+            user: function (UserFactory, $stateParams) {
+                return UserFactory.fetchOne($stateParams.id);
+            }
+        },
+        controller: function ($scope, user) {
+            $scope.user = user;
+        }
+    });
+
 });
 //
 // app.controller('AdminCtrl', function ($scope) {
