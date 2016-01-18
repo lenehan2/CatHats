@@ -59,4 +59,11 @@ navbar {
     }
   }
 
+  #profile-dropdown {
+      float: right;
+      li {
+          cursor: pointer;
+      }
+  }
+
 }

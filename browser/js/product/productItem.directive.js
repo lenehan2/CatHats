@@ -3,6 +3,7 @@ app.directive('productItem', function (CartFactory, ProductFactory, AuthService,
         restrict: 'E',
         scope: {
             product: '=',
+            averageRating: '=',
             full: '=',
             canEdit: '='
         },
@@ -10,7 +11,6 @@ app.directive('productItem', function (CartFactory, ProductFactory, AuthService,
         link: function (scope, element) {
             scope.addToCart = CartFactory.addProduct;
             scope.editMode = false;
-
             scope.toggleEditMode = function () {
                 if (!scope.editMode) scope.editMode = true;
                 else $state.reload()

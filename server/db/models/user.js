@@ -14,13 +14,18 @@ var schema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        //required: true
     },
     isAdmin: {
         type: Boolean,
         default: false
     },
     cart: [itemSchema],
+
+    requireNewPasswordOnLogin: {
+        type: Boolean,
+        default: false
+    },
     salt: {
         type: String
     },
