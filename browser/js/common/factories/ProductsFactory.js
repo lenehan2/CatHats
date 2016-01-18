@@ -17,6 +17,20 @@ app.factory('ProductFactory',function($http){
 			}).then(response => response.data)
 		},
 
+		getAvgRating: function(reviews){
+			var sum = 0;
+			if(reviews.length < 1){
+				return "No reviews for this product yet"
+			}
+			for(var i = 0; i < reviews.length; i++){
+				if(reviews[i].rating){
+					sum+= reviews[i].rating;
+				}
+			}
+			var avg = sum/reviews.length
+			return avg.toFixed(1);
+		},
+
 		getByCategory: function (category) {
 			return $http({
 				method: 'GET',
