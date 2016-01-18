@@ -35,6 +35,12 @@
         </p>
 
         <!-- Good reason to make a category schema in db -->
+        <edit-product-categories
+            ng-show="editMode"
+            categories="['Costumes', 'Formal', 'Seasonal', 'Outerware']"
+            product="product">
+        </edit-product-categories>
+<!--
         <div ng-show="editMode">
             <div ng-repeat="category in ['Costumes', 'Formal', 'Seasonal', 'Outerware']">
                 <input
@@ -43,7 +49,7 @@
                     ng-checked="product.categories.indexOf(category) !== -1">
                 {{category}}
             </div>
-        </div>
+        </div> -->
 
         <p
             ng-if="full"
@@ -87,5 +93,4 @@
     </div>
 
 </div>
-
-<h3 ng-if="full">MAKE A REVIEW DIRECTIVE AND PUT IT HERE</h3>
+<h3 ng-if="full"><add-review><add-review></h3>

@@ -2,12 +2,12 @@ app.config(function ($stateProvider) {
     $stateProvider.state('admin', {
         url: '/admin',
         templateUrl: 'js/admin/admin.html',
-        controller: 'AdminCtrl',
-        resolve: {
-            user: function (AuthService) {
-                return AuthService.getLoggedInUser();
-            }
-        },
+        // controller: 'AdminCtrl',
+        // resolve: {
+        //     user: function (AuthService) {
+        //         return AuthService.getLoggedInUser();
+        //     }
+        // },
         data: {
             adminAuthenticate: true
         }
@@ -26,20 +26,8 @@ app.config(function ($stateProvider) {
         }
     });
 
-    $stateProvider.state('admin.singleProduct', {
-        url: '/products/:id',
-        templateUrl: 'js/admin/edit-product.html',
-        resolve: {
-            product: function (ProductFactory, $stateParams) {
-                return ProductFactory.getSingleProduct($stateParams.id);
-            }
-        },
-        controller: function ($scope, product) {
-            $scope.product = product;
-        }
-    })
 });
-
-app.controller('AdminCtrl', function ($scope, user) {
-    $scope.user = user;
-})
+//
+// app.controller('AdminCtrl', function ($scope) {
+//     $scope.user = user;
+// })

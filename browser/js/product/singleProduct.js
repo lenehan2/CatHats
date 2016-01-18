@@ -9,11 +9,17 @@ app.config(function($stateProvider){
 			},
 			user: function(AuthService) {
 				return AuthService.getLoggedInUser();
-			}
+			},
+			reviews: function(ReviewFactory, $stateParams){
+                return ReviewFactory.getReviewsByProduct($stateParams.productId);
+            }
 		}
 	});
 });
 
-app.controller('singleProductCtrl', function($scope, product, user){
+
+app.controller('singleProductCtrl', function($scope, reviews, product, $state){
+		$scope.reviews = reviews;
 		$scope.product = product;
-});
+})
+

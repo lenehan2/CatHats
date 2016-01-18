@@ -4,4 +4,8 @@
         product="product"
         full="true">
     </product-item>
+    <div ng-repeat="review in reviews">
+		<h4>Title: {{review.title}} Rating: {{review.rating}}</h4>
+		<p>{{review.description}}</p>
+	</div>
 </div>

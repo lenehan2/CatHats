@@ -37,6 +37,16 @@ app.factory('ProductFactory',function($http){
 			})
 			.then(res => res.data)
 			.then(null, console.error.bind(console));
-		}
+		},
+
+        addProduct: function (newProduct) {
+            return $http({
+                method: 'POST',
+                url: '/api/products',
+                data: newProduct
+            })
+            .then(res => res.data)
+            .then(null, console.error.bind(console));
+        }
 	}
 })
