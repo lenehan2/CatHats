@@ -41,6 +41,12 @@ router.post('/:id/reviews', function(req, res, next){
         .then(null, next);
 });
 
+router.get('/:id/reviews', function(req, res, next){
+    Review.find({})
+    .then(reviews => res.json(reviews))
+    .then(null, next);
+});
+
 router.get('/:id', function (req, res, next) {
     res.json(req.product);
 });
