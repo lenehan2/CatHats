@@ -1,0 +1,14 @@
+<order-search items="items"></order-search>
+
+<div class="container">
+    <div ng-repeat="order in orders" class="card">
+        <a ui-sref="adminOrder({ id: order._id})">
+            <order-item order="order" full="test" ></order-item>
+        </a>
+	<button ng-click="test=!test">Details</button>
+	
+    </div>
+
+    
+    
+</div>

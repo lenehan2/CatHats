@@ -8,7 +8,30 @@ app.factory('OrderFactory', function ($http) {
                 .then(null, err => console.error(err));
         },
 
+        adminDeleteOrder: function(orderId){
+            return $http({
+                method: 'PUT',
+                url: '/api/admin/orders/'+orderId,
+                data: {status: "Cancelled"}
+            })
+            .then(res => res.data)
+            .then(null,err=> console.error(err))
+        },
+
+        adminGetAllOrders: function(params){
+            var params = params || {};
+
+            return $http({
+                method: 'GET',
+                url: '/api/admin/orders',
+                params: params
+                })
+                .then(res => res.data)
+                .then(null, err => console.error(err));
+        },
+
         adminGetOrderById: function (orderId) {
+            console.log("CALLED")
             return $http.get('/api/admin/orders/' + orderId)
                 .then(res => res.data)
                 .then(null, err => console.error(err));
