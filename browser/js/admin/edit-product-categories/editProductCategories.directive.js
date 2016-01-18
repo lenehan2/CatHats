@@ -8,10 +8,12 @@ app.directive('editProductCategories', function () {
         templateUrl: 'js/admin/edit-product-categories/edit-product-categories.html',
         link: function (scope, element) {
 
-            // TODO figure out how to do this only when the boxes are clicked
-            element.on('click', function () {
+            // Keep product.categories up to date with what options are selected
+            element.on('click', function (event) {
+
+                // Only runfunction when the actual checkbox is clicked
+                if (event.target.localName !== 'input') return;
                 scope.product.categories = updateCategories();
-                console.log('product: ', scope.product);
             });
 
             function updateCategories() {
