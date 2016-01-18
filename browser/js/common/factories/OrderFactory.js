@@ -19,6 +19,7 @@ app.factory('OrderFactory', function ($http) {
         },
 
         adminGetAllOrders: function(params){
+            console.log("I'm being called with", params);
             var params = params || {};
 
             return $http({
