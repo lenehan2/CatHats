@@ -34,7 +34,9 @@
             <label for="imageUrl">Image URL:</label>
             <input ng-model="newProduct.imageUrl" class="form-control">
         </div>
-        <img ng-src="{{newProduct.imageUrl}}">
+        <div>
+            <img ng-src="{{newProduct.imageUrl}}">
+        </div>
         <button type="submit">Save</button>
     </form>
 </div>

@@ -1,7 +1,9 @@
 <div class="container">
     <product-categories categories="categories"/></product-categories>
     <product-search></product-search>
-
+    <a ui-sref="admin.newProduct">
+        <button class="btn btn-warning">Add a New Product</button>
+    </a>
     <div ng-repeat="product in products" class="card col-xs-12">
         <product-item product="product" full="false" can-edit="true" />
     </div>
