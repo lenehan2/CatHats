@@ -24,12 +24,12 @@ router.param('id',function(req,res,next,id){
 	.populate('orders')
 	.then(user => {
 		if(!user){
+			console.log("THIS SHOULDNT BE HIT")
 			var err = new Error('Not Found');
 			err.status = 404
 			next(err)
 		}else{
 			req.foundUser = user;
-			console.log(req.foundUser.orders);
 			next();
 		}
 	})
@@ -37,15 +37,15 @@ router.param('id',function(req,res,next,id){
 
 router.param('orderId',function(req,res,next,id){
 	Order.findById(id)
-	.populate('orders')
-	.then(user => {
-		if(!user){
+	.then(order => {
+		if(!order){
+			console.log(":(")
 			var err = new Error('Not Found');
 			err.status = 404
 			next(err)
 		}else{
-			req.foundUser = user;
-			console.log(req.foundUser.orders);
+			console.log(":)", req.foundOrder)
+			req.foundOrder = order;
 			next();
 		}
 	})
@@ -62,7 +62,9 @@ router.get('/users', function(req, res, next) {
 //GET ALL ORDERS AS ADMIN
 
 router.get('/orders', function(req, res, next){
-	Order.find().exec()
+	var params = req.query || {};
+	console.log("Params from admin:65: ",params)
+	Order.find(params).exec()
 		.then(orders => res.status(200).json(orders))
 		.then(null, next)
 })
@@ -83,17 +85,16 @@ router.get('/users/:id/orders',function(req,res,next){
 
 //Get an order by ID
 
-router.get('orders/:orderId',function(req,res,next){
-	Order.find({ user: req.params.id })
-		.then(orders => res.json(orders))
-		.then(null, next);
+router.get('/orders/:orderId',function(req,res,next){
+	console.log('order: ', req.foundOrder)
+	res.status(200).send(req.foundOrder)
 });
 
 
 
 //Allows an admin to update a users information, including isAdmin!
 
-router.put('/users/:id', function(req, res, next) {
+router.put('/users/:id', function(req, res, next) {   
     Object.keys(req.body).forEach(function(key) {
         req.foundUser[key] = req.body[key];
     });
@@ -104,13 +105,17 @@ router.put('/users/:id', function(req, res, next) {
 //An admin can Update the status of any order
 
 router.put('/orders/:orderId', function (req, res, next) {
+	console.log("IN HERE")
+    console.log(req.order)
     var err = new Error('Not A valid order status');
     err.status = 403;
-
     if (req.body.status) {
-        req.order.status === req.body.status;
-        req.order.save()
-            .then((order) => res.status(200).json(order))
+        req.foundOrder.status = req.body.status;
+        req.foundOrder.save()
+            .then((order) => {
+            	console.log("UPDATED ORDER: ", order)
+            	res.status(200).json(order)
+            })
             .then(null, next);
     } else {
         next(err);

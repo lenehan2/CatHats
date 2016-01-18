@@ -15,19 +15,24 @@ module.exports = function (app) {
         callbackURL: googleConfig.callbackURL
     };
 
+    //this is the data coming back from google
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
-
-        UserModel.findOne({ 'google.id': profile.id }).exec()
+        // UserModel.findOne({ 'google.id': profile.id }).exec()
+        // It makes more sense to me if we're searching for a user according to their email, not their google.id
+        var profileEmail = profile.emails[0].value;
+        UserModel.findOne({ 'email': profileEmail }).exec() 
             .then(function (user) {
 
                 if (user) {
                     return user;
                 } else {
-                    return UserModel.create({
+                    var newUserInfo = {
+                        email: profileEmail,
                         google: {
                             id: profile.id
                         }
-                    });
+                    };
+                    return UserModel.create(newUserInfo);
                 }
 
             }).then(function (userToLogin) {
@@ -41,6 +46,7 @@ module.exports = function (app) {
 
     passport.use(new GoogleStrategy(googleCredentials, verifyCallback));
 
+    //this is where the user requests login through google
     app.get('/auth/google', passport.authenticate('google', {
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
@@ -48,8 +54,9 @@ module.exports = function (app) {
         ]
     }));
 
-    app.get('/auth/google/callback',
-        passport.authenticate('google', { failureRedirect: '/login' }),
+    //this is where google redirects our user after they've been authenticated
+    app.get('/auth/google/callback', //corresponds to the callback we specified in 'env'
+        passport.authenticate('google', { failureRedirect: '/login' }), //where is the successRedirect?
         function (req, res) {
             res.redirect('/');
         });
