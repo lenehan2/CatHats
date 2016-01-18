@@ -38,6 +38,32 @@ app.config(function ($stateProvider) {
             $scope.product = product;
         }
     })
+
+    $stateProvider.state('admin.users', {
+        url: '/users',
+        templateUrl: 'js/admin/admin-users.html',
+        resolve: {
+            users: function (UserFactory) {
+                return UserFactory.fetchAll();
+            }
+        },
+        controller: function ($scope, users) {
+            $scope.users = users;
+        }
+    });
+
+    $stateProvider.state('admin.singleUser', {
+        url: '/users/:id',
+        templateUrl: '/js/admin/edit-user.html',
+        resolve: {
+            user: function (UserFactory, $stateParams) {
+                return UserFactory.fetchOne($stateParams.id);
+            }
+        },
+        controller: function ($scope, user) {
+            $scope.user = user;
+        }
+    });
 });
 
 app.controller('AdminCtrl', function ($scope, user) {
