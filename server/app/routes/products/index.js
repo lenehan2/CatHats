@@ -42,7 +42,6 @@ router.post('/:id/reviews', function(req, res, next){
 });
 
 router.get('/:id/reviews', function(req, res, next){
-    console.log("back end product", req.product)
     Review.find({product: req.params.id })
     .then(reviews => res.json(reviews))
     .then(null, next);
