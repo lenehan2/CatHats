@@ -30,6 +30,23 @@ app.factory('UserFactory', function($http, AuthService){
 			})
 			.then(response => response.data)
 			.then(null, console.error.bind(console));
+		},
+		newPassword: function(userId){
+			return $http({
+				method: 'PUT',
+				url: '/api/admin/users/' + userId,
+				data: { requireNewPasswordOnLogin: true }
+			})
+			.then(res => res.data)
+			.then(null,console.error.bind(console))
+		},
+		updatePassword: function(newPass){
+			return $http({
+				method: 'PUT',
+				url: 'api/user/',
+				data: { password: newPass, requireNewPasswordOnLogin: false },
+			}).then(res => res.data)
+			.then(null, console.error.bind(console))
 		}
 
 	}
