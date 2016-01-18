@@ -10,7 +10,18 @@
         </ul>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
         <button ng-show="!user" ui-sref="signup" class="btn login-button">Sign Up</button>
-        <button ng-show="user" ui-sref="userOrders({id: user._id})" class="btn login-button">My Orders</button>
+
+        <button
+            class="btn login-button"
+            ng-click="isCollapsed = !isCollapsed">
+            My Profile
+        </button>
+        <hr>
+        <ul uib-collapse="isCollapsed" id="profile-dropdown">
+            <li>Some content</li>
+            <li><button ng-show="user" ui-sref="userOrders({id: user._id})" class="btn login-button">My Orders</button></li>
+        </ul>
+
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>
