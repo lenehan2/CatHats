@@ -61,6 +61,7 @@ router.post('/',function(req,res,next){
 
 router.put('/', function (req, res, next) {
     var user = req.user ? req.user : req.session;
+
     user.updateCart(req.body)
         .then(user => user.cart)
         .then(cart => Product.populate(cart, { path: 'product' }))
