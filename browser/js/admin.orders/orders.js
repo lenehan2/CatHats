@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('adminAllOrders', {
-        url: '/admin/orders?_id?name',
+        url: '/admin/orders?_id?name?status',
         templateUrl: '/js/admin.orders/orders.html',
         resolve: {
             orders: function(OrderFactory, $stateParams) {
@@ -18,6 +18,10 @@ app.config(function($stateProvider) {
                 id: 2,
                 label: 'User name',
                 value: 'name'
+            }, {
+                id: 3,
+                label: 'Status',
+                value: 'status'
             }];
             
         }
