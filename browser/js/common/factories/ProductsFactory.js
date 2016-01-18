@@ -47,6 +47,15 @@ app.factory('ProductFactory',function($http){
             })
             .then(res => res.data)
             .then(null, console.error.bind(console));
-        }
+        },
+
+		deleteProduct: function (productId) {
+			return $http({
+				method: 'DELETE',
+				url: '/api/products/' + productId
+			})
+			.then(res => res.data)
+			.then(null, err => console.error(err));
+		}
 	}
 })
