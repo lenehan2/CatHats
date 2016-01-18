@@ -6,6 +6,8 @@
         <h4>{{ user.email }}</h4>
         <h5 ng-show="user.isAdmin">Admin</h5>
         <button ng-hide="user.isAdmin" ng-click="makeAdmin()">Make Admin</button>
+        <button ng-click="newPassword()">Require New Password on Login</button>
+
 
     </div>
 </div>

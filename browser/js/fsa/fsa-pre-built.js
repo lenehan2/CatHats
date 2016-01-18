@@ -21,7 +21,8 @@
         logoutSuccess: 'auth-logout-success',
         sessionTimeout: 'auth-session-timeout',
         notAuthenticated: 'auth-not-authenticated',
-        notAuthorized: 'auth-not-authorized'
+        notAuthorized: 'auth-not-authorized',
+        newLoginPassword: 'require-new-password'
     });
 
     app.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS) {
@@ -92,7 +93,11 @@
 
         this.login = function(credentials) {
             return $http.post('/login', credentials)
-                .then(onSuccessfulLogin)
+                .then(function(user){
+                    console.log("USER@97: ", user);
+                    var user2 = onSuccessfulLogin(user)
+                    console.log("USER@99", user2)
+                })
                 .catch(function() {
                     return $q.reject({
                         message: 'Invalid login credentials.'

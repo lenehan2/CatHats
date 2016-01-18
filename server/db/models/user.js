@@ -21,6 +21,11 @@ var schema = new mongoose.Schema({
         default: false
     },
     cart: [itemSchema],
+
+    requireNewPasswordOnLogin: {
+        type: Boolean,
+        default: false
+    },
     salt: {
         type: String
     },

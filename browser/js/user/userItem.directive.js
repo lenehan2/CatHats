@@ -13,6 +13,12 @@ app.directive('userItem', function(UserFactory, $state) {
 					.then(function () {
 						$state.reload();
 					});
+			},
+			scope.newPassword = function () {
+				UserFactory.newPassword(scope.user._id)
+				.then(function (){
+					$state.reload();
+				})
 			}
 		}
 	}
