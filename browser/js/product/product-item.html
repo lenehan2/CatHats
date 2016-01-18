@@ -18,6 +18,16 @@
             {{product.price / 100 | currency }}
         </p>
 
+        <div ng-show="canEdit && full">
+            <p>
+                Inventory count:
+                <p
+                    contenteditable="{{editMode}}"
+                    ng-model="product.inventory">
+                </p>
+            </p>
+        </div>
+
         <div ng-show="editMode">
             <p>Price (in cents):</p>
             <p
@@ -40,16 +50,6 @@
             categories="['Costumes', 'Formal', 'Seasonal', 'Outerware']"
             product="product">
         </edit-product-categories>
-<!--
-        <div ng-show="editMode">
-            <div ng-repeat="category in ['Costumes', 'Formal', 'Seasonal', 'Outerware']">
-                <input
-                    type="checkbox"
-                    ng-value="category"
-                    ng-checked="product.categories.indexOf(category) !== -1">
-                {{category}}
-            </div>
-        </div> -->
 
         <p
             ng-if="full"
@@ -59,7 +59,7 @@
 
         <a
             ui-sref="singleProduct({ productId: product._id })"
-            ng-if="!full">
+            ng-if="!full && !canEdit">
             <p>More Info</p>
         </a>
 
@@ -69,12 +69,15 @@
             <p>Edit</p>
         </a>
 
-        <button
-            ng-click="addToCart(product._id)"
-            ng-hide="canEdit"
-            class="btn">
+        <div ng-hide="canEdit">
+            <button
+                ng-click="addToCart(product._id)"
+                ng-if="product.inventory > 0"
+                class="btn">
             Add to Cart
-        </button>
+            </button>
+            <p ng-if="product.inventory === 0">Out of stock!</p>
+        </div>
         </br>
 
         <button
