@@ -42,7 +42,7 @@ router.post('/:id/reviews', function(req, res, next){
 });
 
 router.get('/:id/reviews', function(req, res, next){
-    Review.find({})
+    Review.find({ product: req.product._id})
     .then(reviews => res.json(reviews))
     .then(null, next);
 });
