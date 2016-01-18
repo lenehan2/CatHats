@@ -14,7 +14,7 @@ module.exports = {
   "GOOGLE": {
     "clientID": "717470358353-gr8fk65f37evibd1cndoucc1vqbhpg0i.apps.googleusercontent.com",
     "clientSecret": "EIqQtb7O2fcsMxeC8NW4f9sY",
-    "callbackURL": "http://127.0.0.1:8080/auth/google/callback"
+    "callbackURL": "http://127.0.0.1:1337/auth/google/callback"
     //this callback is for the localhost?
   }
 };
