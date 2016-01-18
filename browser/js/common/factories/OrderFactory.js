@@ -19,7 +19,6 @@ app.factory('OrderFactory', function ($http) {
         },
 
         adminGetAllOrders: function(params){
-            console.log("I'm being called with", params);
             var params = params || {};
 
             return $http({
@@ -32,7 +31,6 @@ app.factory('OrderFactory', function ($http) {
         },
 
         adminGetOrderById: function (orderId) {
-            console.log("CALLED")
             return $http.get('/api/admin/orders/' + orderId)
                 .then(res => res.data)
                 .then(null, err => console.error(err));
