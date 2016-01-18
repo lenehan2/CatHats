@@ -21,12 +21,12 @@ app.factory('UserFactory', function($http, AuthService){
 			.then(AuthService.getLoggedInUser.bind(AuthService));
 		},
 
-		update: function(userId, newUserData){
+		makeAdmin: function(userId){
 			return $http({
 				method: 'PUT',
 				//this will need to be modified to accept requests from users that are editing their own profile
-				url: 'admin/users/' + userId,
-				data: newUserData
+				url: '/api/admin/users/' + userId,
+				data: { isAdmin: true }
 			})
 			.then(response => response.data)
 			.then(null, console.error.bind(console));

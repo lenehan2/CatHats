@@ -75,7 +75,7 @@ router.get('/users/:id',function(req, res, next){
 
 //GET ORDERS BY USER
 
-router.get('users/:id/orders',function(req,res,next){
+router.get('/users/:id/orders',function(req,res,next){
 	Order.find({ user: req.params.id })
 		.then(orders => res.json(orders))
 		.then(null, next);
