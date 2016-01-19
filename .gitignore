@@ -5,3 +5,4 @@ public
 .DS_Store
 coverage
 API_keys.js
+bower_components
