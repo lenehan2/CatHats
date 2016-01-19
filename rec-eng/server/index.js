@@ -8,8 +8,14 @@ var cors = require('cors');
 var app = express();
 var port = process.env.REC_PORT || 8080;
 
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
+
 app.get('/api/recommendations/:productId', function (req, res, next) {
-    console.log("Hello from 8080");
+    console.log("req.params.productId is", req.params.productId);
     Order.find()
         .where('products.product', req.params.productId)
         .then(orders => res.json(
