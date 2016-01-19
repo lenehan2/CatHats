@@ -13,14 +13,16 @@
     <!-- Repeat for in-stock products and organize into bootstrap grid -->
     <div
         ng-repeat="product in inStock track by $index"
-        ng-if="$index % 3 === 0"
+        ng-if="$index % 2 === 0"
         class="row">
         <div
-            ng-repeat="i in [$index, $index + 1, $index + 2]"
+            ng-repeat="i in [$index, $index + 1]"
             ng-if="inStock[i]"
-            class="col-xs-4">
+            class="col-md-6">
             <div class="card">
-                <product-item product="inStock[i]" full="false"></product-item>
+                <a ui-sref="singleProduct({ productId: product._id })">
+                    <product-item product="inStock[i]" full="false"></product-item>
+                </a>
             </div>
         </div>
     </div>

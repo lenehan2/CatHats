@@ -15,8 +15,6 @@ module.exports = function (app) {
         callbackURL: googleConfig.callbackURL
     };
 
-    console.log('GOOGLE: ', googleCredentials);
-
     //this is the data coming back from google
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
         // UserModel.findOne({ 'google.id': profile.id }).exec()
