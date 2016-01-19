@@ -7,14 +7,18 @@ app.factory('ProductFactory',function($http){
 				method: 'GET',
 				url: '/api/products',
 				params: params
-			}).then(response => response.data)
+			})
+			.then(response => response.data)
+			.then(null, console.error.bind(console));
 		},
 
 		getSingleProduct: function(productId){
 			return $http({
 				method: 'GET',
 				url: '/api/products/' + productId
-			}).then(response => response.data)
+			})
+			.then(response => response.data)
+			.then(null, console.error.bind(console));
 		},
 
 		getAvgRating: function(reviews){

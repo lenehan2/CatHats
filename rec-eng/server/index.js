@@ -1,19 +1,31 @@
 require('./db');
 var express = require('express');
+var Promise = require('bluebird');
 var mongoose = require('mongoose');
 var Order = mongoose.model('Order');
+var Product = mongoose.model('Product')
 var _ = require('lodash');
 
 var app = express();
 var port = process.env.REC_PORT || 8080;
 
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
+
 app.get('/api/recommendations/:productId', function (req, res, next) {
     Order.find()
         .where('products.product', req.params.productId)
-        .then(orders => res.json(
-                parseOrders(req.params.productId, orders)
-            )
-        )
+        .then(orders => {
+            var products = {};
+            products.productId = parseOrders(req.params.productId, orders);
+            return Product.populate(products, { path: 'productId' });
+        })
+        .then(products => {
+            res.json(products.productId);
+        })
         .then(null, next);
 });
 
