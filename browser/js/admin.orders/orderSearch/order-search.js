@@ -14,8 +14,11 @@ app.directive('orderSearch', function($state) {
                 else if (param ==="name") {
                     searchParam = {name: search}
                 }
+                else if (param ==="status"){
+                    searchParam = {status: search}
+                }
                 console.log("teee",searchParam)
-                $state.go('adminAllOrders', searchParam)
+                $state.go('adminAllOrders', searchParam);
             };
         }
     }

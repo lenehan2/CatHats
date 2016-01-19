@@ -124,6 +124,89 @@ var seedProducts = function() {
     return Product.createAsync(products);
 }
 
+// var seedOrders = function(){
+    
+//     function creditCardNumberGenerator(){
+//         return Math.floor(Math.random() * 10000000000000000);
+//     }
+
+//     function threeDigitNumberGenerator(){
+//         return Math.floor(Math.random() * 1000);
+//     }
+
+//     var streetName = ["Park", "Magnolia", "Maple", "Washington", "Kosciuszko"];
+
+//     var streetType = ["St.", "Dr.", "Blvd.", "Ave.", "Cir."];
+
+//     var stateChoices = ["WA", "VA", "PA", "DE", "RI"];
+
+//     var cityChoices = ["Los Angeles", "Parris", "West Chester", "Brooklyn", "Chicago"];
+
+//     var firstNameChoices = ["Sam", "Chris", "John", "Conner", "Kat"];
+
+//     var lastNameChoices = ["Tryens", "Lenehan", "Narisi", "Dwyer", "Greene"];
+
+//     var statusChoices = ['Created', 'Processing', 'Cancelled', 'Completed']
+
+//     var userChoices = ["569ced5eca493fac21680150", "569cef582162ebee2119f2b2", "569ced5eca493fac2168014f"];
+
+//     function nameGenerator(){
+//         return firstNameChoices[oneOutOfFive()] + " " + lastNameChoices[oneOutOfFive()];
+//     }
+
+//     var productChoices = ["569ced5eca493fac2168015a", "569ced5eca493fac21680158", "569ced5eca493fac21680153", "569ced5eca493fac2168015b", "569ced5eca493fac21680159"];
+
+//     function oneOutOf(num){
+//         return Math.floor(Math.random() * (num - 1));
+//     }
+
+//     function streetAddressGenerator() {
+//         var houseNumber = threeDigitNumberGenerator();
+//         var street = streetName[oneOutOf(5)] + " " + streetType[oneOutOf(5)];
+//         return houseNumber + " " + street;
+//     }
+
+//     function zipCodeGenerator() {
+//         return Math.floor(Math.random() * 100000);
+//     }
+
+//     function orderMaker(){
+        
+//         return {
+//             products: [productChoices[oneOutOf(5)]],
+//             shipping: {
+//                 streetAddress: streetAddressGenerator(),
+//                 city: cityChoices[oneOutOf(5)],
+//                 state: stateChoices[oneOutOf(5)],
+//                 zip: zipCodeGenerator()
+//             },
+//             payment: {
+//                 creditCardNumber: creditCardNumberGenerator(),
+//                 nameOnCard: nameGenerator(),
+//                 csv: threeDigitNumberGenerator(),
+//                 billingAddress: {
+//                     streetAddress: streetAddressGenerator(),
+//                     city: cityChoices[oneOutOfFive()],
+//                     state: stateChoices[oneOutOfFive()],
+//                     zip: zipCodeGenerator()
+//                 }
+//             },
+//             user: userChoices[oneOutOf(3)],
+//             status: statusChoices[oneOutOf(4)]
+//         }
+//     }
+
+//     var orders = [];
+
+//     for(var i = 0; i < 10; i++){
+//         var order = orderMaker();
+//         orders.push(order);
+//     }
+//     console.log("orders is", orders);
+//     return Order.createAsync(orders);
+
+// }
+
 connectToDb.then(function() {
     User.findAsync({}).then(function(users) {
         if (users.length === 0) {
@@ -154,4 +237,19 @@ connectToDb.then(function() {
         console.error(err);
         process.kill(1);
     })
+
+    // Order.findAsync({}).then(function(orders) {
+    //     if (orders.length === 0) {
+    //         return seedOrders();
+    //     } else {
+    //         console.log(chalk.magenta('Seems to already be order data, exiting!'));
+    //         process.kill(0);
+    //     }
+    // }).then(function() {
+    //     console.log(chalk.green('Order Seed successful!'));
+    //     process.kill(0);
+    // }).catch(function(err) {
+    //     console.error(err);
+    //     process.kill(1);
+    // })
 });
