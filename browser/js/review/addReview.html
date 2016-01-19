@@ -4,7 +4,8 @@
     </alert>
     <div class="form-group">
       <label for="rating">Rating</label>
-      <input type="number" min='1' max='5' ng-model="review.rating">
+      <rating ng-model="review.rating" type="number" min='1' max="5"></rating>
+     <!--  <input type="number" min='1' max='5' ng-model="review.rating"> -->
     </div>
     <div class="form-group">
       <label for="title">Review Title</label><br/>
