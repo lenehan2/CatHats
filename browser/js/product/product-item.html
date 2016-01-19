@@ -73,7 +73,7 @@
             <button
                 ng-click="addToCart(product._id)"
                 ng-if="product.inventory > 0"
-                class="btn">
+                class="btn btn-primary">
             Add to Cart
             </button>
             <p ng-if="product.inventory === 0">Out of stock!</p>
@@ -98,4 +98,3 @@
 </div>
 <h4> Avg Rating: {{averageRating}} </h4>
 <h5 ng-if="full"><add-review><add-review></h5>
-

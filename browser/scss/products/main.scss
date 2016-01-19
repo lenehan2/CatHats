@@ -1,0 +1,19 @@
+@mixin button-shadows {
+    box-shadow: 1px 1px 8px 1px rgba(0,0,0,.25);
+
+    &:active {
+        box-shadow: 1px 1px 8px -3px black;
+        outline: none!important;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.btn {
+    @include button-shadows;
+
+    border-radius: 0;
+    border: none;
+}
