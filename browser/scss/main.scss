@@ -2,7 +2,7 @@
 // Colors
 $primary: #2c3e50;
 $light: #ecf0f1;
-$accent: #e67e22;
+$accent: #e74c3c;
 $gray: #CFD8DC;
 $white: #fdfdfd;
 
@@ -71,6 +71,7 @@ body {
 }
 
 @import 'directives/main';
+@import 'products/main';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';

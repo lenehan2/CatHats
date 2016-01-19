@@ -22,9 +22,9 @@
             <h3>{{product.title}}</h3>
         </a>
 
-        <p ng-hide="editMode">
+        <h3 ng-hide="editMode">
             {{product.price / 100 | currency }}
-        </p>
+        </h3>
 
         <div ng-show="canEdit && full">
             <p>
@@ -45,12 +45,12 @@
             </p>
         </div>
 
-        <p ng-hide="editMode">
-            <span ng-repeat="category in product.categories">
-                <span ng-if="$index > 0">, </span>
-                {{category}}
-            </span>
-        </p>
+        <h4 ng-hide="editMode">
+            <span ng-repeat="category in product.categories"><!--
+            --><span ng-if="$index > 0">, </span><!--
+            -->{{category}}<!--
+            --></span>
+        </h4>
 
         <!-- Good reason to make a category schema in db -->
         <edit-product-categories
@@ -65,11 +65,11 @@
             ng-model="product.description">
         </p>
 
-        <a
+        <!-- <a
             ui-sref="singleProduct({ productId: product._id })"
             ng-if="!full && !canEdit">
             <p>More Info</p>
-        </a>
+        </a> -->
 
         <p>
             <a

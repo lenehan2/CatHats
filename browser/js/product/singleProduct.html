@@ -7,7 +7,13 @@
         full="true">
     </product-item>
     <h3> Avg Rating: {{averageRating}} </h3>
-    <h5 ng-if="user"><add-review><add-review></h5>
+    <button ng-if="user" ng-click="toggleReviewForm()">
+        <span ng-show="!showReviewForm">Add a Review</span>
+        <span ng-show="showReviewForm">Cancel</span>
+    </button>
+    <h5 ng-if="showReviewForm">
+        <add-review><add-review>
+    </h5>
     <div ng-repeat="review in reviews">
 		<h4>Title: {{review.title}} Rating: {{review.rating}}</h4>
         <h6>{{ review.user.email }}</h6>
