@@ -11,6 +11,9 @@
         <a ng-if="!canEdit" ui-sref="singleProduct({ productId: product._id })">
             <img ng-src="{{product.imageUrl}}" class="img-responsive center-block">
         </a>
+        <a ng-if="canEdit" ui-sref="admin.singleProduct({ id: product._id })">
+            <img ng-src="{{product.imageUrl}}" class="img-responsive center-block">
+        </a>
         <div ng-show="editMode">
             Image Url: <span contenteditable="{{editMode}}" ng-model="product.imageUrl"></span>
         </div>
