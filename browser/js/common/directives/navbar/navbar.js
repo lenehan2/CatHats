@@ -30,6 +30,9 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             }
 
             scope.regexName = function(email){
+                if(!email){
+                    return;
+                }
                 var emailString = email;
                 return emailString.replace(/@.*/g, "");
             }
