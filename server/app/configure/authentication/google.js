@@ -9,18 +9,20 @@ module.exports = function (app) {
 
     var googleConfig = app.getValue('env').GOOGLE;
 
+
     var googleCredentials = {
         clientID: googleConfig.clientID,
         clientSecret: googleConfig.clientSecret,
         callbackURL: googleConfig.callbackURL
     };
+    console.log('GOOGLE: ', googleCredentials);
 
     //this is the data coming back from google
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
         // UserModel.findOne({ 'google.id': profile.id }).exec()
         // It makes more sense to me if we're searching for a user according to their email, not their google.id
         var profileEmail = profile.emails[0].value;
-        UserModel.findOne({ 'email': profileEmail }).exec() 
+        UserModel.findOne({ 'email': profileEmail }).exec()
             .then(function (user) {
 
                 if (user) {
