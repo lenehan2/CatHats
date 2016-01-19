@@ -8,9 +8,13 @@
     </product-item>
     <h3> Avg Rating: {{averageRating}} </h3>
     <h5 ng-if="user"><add-review><add-review></h5>
-    <div ng-repeat="review in reviews">
-		<h4>Title: {{review.title}} Rating: {{review.rating}}</h4>
-        <h6>{{ review.user.email }}</h6>
-		<p>{{review.description}}</p>
-	</div>
+    <div ng-init="limit = 5">
+        <div ng-repeat="review in reviews | limitTo: limit">
+    		<h4>Title: {{review.title}} Rating: {{review.rating}}</h4>
+            <h6>{{ review.user.email }}</h6>
+    		<p>{{review.description}}</p>
+    	</div>
+    </div>
+    <button ng-show="limit<reviews.length" ng-click="limit = limit +5">show more...</button>
+    <button ng-show="limit>5" ng-click="limit = 5">show less</button>
 </div>
