@@ -1,3 +1,7 @@
+// App variables
+$gray: #CFD8DC;
+$white: #fdfdfd;
+
 * {
   box-sizing: border-box;
 }
@@ -24,4 +28,5 @@ body {
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
-@import 'orders/main';
+@import 'products/main';
+@import 'shared/main';

@@ -3,6 +3,7 @@
         type="text"
         placeholder="Filter categories..."
         ng-model="query"
+        class="form-control product-form"
     >
     <ul class="category-list">
         <li ng-repeat="category in categories | filter : query">

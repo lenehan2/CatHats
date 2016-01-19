@@ -17,6 +17,10 @@ app.controller('ProductsCtrl', function($scope, products){
 			return acc.concat(
 				curr.categories.filter(cat => acc.indexOf(cat) === -1)
 			)
-		}, [])
+		}, []);
+
+
+		$scope.inStock = $scope.products.filter(product => product.inventory > 0);
+		console.log('in stock: ', $scope.inStock);
 
 })
