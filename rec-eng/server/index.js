@@ -3,11 +3,13 @@ var express = require('express');
 var mongoose = require('mongoose');
 var Order = mongoose.model('Order');
 var _ = require('lodash');
+var cors = require('cors');
 
 var app = express();
 var port = process.env.REC_PORT || 8080;
 
 app.get('/api/recommendations/:productId', function (req, res, next) {
+    console.log("Hello from 8080");
     Order.find()
         .where('products.product', req.params.productId)
         .then(orders => res.json(
