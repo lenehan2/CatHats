@@ -19,10 +19,14 @@ app.config(function($stateProvider){
 
 
 app.controller('singleProductCtrl', function($scope, reviews, product, user, $state, ProductFactory){
+		$scope.showReviewForm = false;
 		$scope.reviews = reviews;
 		$scope.product = product;
 		$scope.error;
 		$scope.averageRating = ProductFactory.getAvgRating(reviews);
 		$scope.user = user;
-});
 
+		$scope.toggleReviewForm = function () {
+			$scope.showReviewForm = !$scope.showReviewForm;
+		}
+});
