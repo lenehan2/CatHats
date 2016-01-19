@@ -1,5 +1,5 @@
 app.factory('UserFactory', function($http, AuthService){
-	
+
 	return {
 
 		fetchAll: function(){
@@ -17,7 +17,7 @@ app.factory('UserFactory', function($http, AuthService){
 		},
 
 		signup: function(user){
-			return $http.post('/api/users/', user)
+			return $http.post('/api/user/', user)
 			.then(AuthService.getLoggedInUser.bind(AuthService));
 		},
 
