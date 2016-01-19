@@ -6,16 +6,16 @@ var Product = mongoose.model('Product');
 var Order = mongoose.model('Order');
 
 router.param('id', function (req, res, next, id) {
+    console.log('in router param');
     Order.findById(id)
         .populate('products.product')
         .then(order => {
-            console.log(order);
             if (!order) {
                 var err = new Error('Order not found');
                 err.status = 404;
                 return next(err);
             }
-            //Checking to make sure the user isn't looking for a cart 
+            //Checking to make sure the user isn't looking for a cart
             //that isn't theirs
             if (!req.user || req.user._id.toString() !== order.user.toString()){
                 console.log('Req.user: ',req.user)
@@ -30,6 +30,7 @@ router.param('id', function (req, res, next, id) {
                 return next(err);
             }
             req.order = order;
+            console.log('after auth: ', req.order);
             next();
         })
         .then(null, next);
@@ -55,11 +56,19 @@ router.get('/:id', function (req, res, next) {
 
 //User can delete an order that belongs to them
 router.put('/:id', function (req, res, next) {
+    console.log(req.order);
     var err = new Error('Not authorized');
     err.status = 403;
 
-    if (req.body.status === 'cancelled') {
-        req.order.status === 'cancelled';
+    if (req.body.status === 'Cancelled') {
+        if (req.order.status === 'Cancelled' || req.body.status === 'Completed') {
+            err = new Error('Order can not be cancelled');
+            err.status = 401;
+            return next(err);
+        }
+
+        req.order.status = 'Cancelled';
+        console.log(req.order);
         req.order.save()
             .then((order) => res.status(200).json(order))
             .then(null, next);
