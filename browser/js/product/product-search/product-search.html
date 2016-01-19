@@ -1,11 +1,11 @@
-<form ng-submit="searchProducts(search.title)" class="form-inline product-form">
+<form ng-submit="searchProducts(search.title)">
     <div class="form-group">
         <input
-        type="text"
-        ng-model="search.title"
-        placeholder="Search for a product..."
-        class="form-control"
-        id="search-input"
+            type="text"
+            ng-model="search.title"
+            placeholder="Search for a product..."
+            class="form-control product-form"
+            id="search-input"
         >
         <button type="submit" class="btn btn-info" id="search-button">
             <span class="glyphicon glyphicon-search"></span>

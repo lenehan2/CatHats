@@ -1,14 +1,7 @@
 <div class="container">
-    <div class="row">
-        <product-categories
-            categories="categories"
-            class="col-xs-4">
-        </product-categories>
-        <product-search
-            class="col-xs-4">
-        </product-search>
+    <product-search></product-search>
+    <product-categories categories="categories"></product-categories>
 
-    </div>
 
     <!-- Repeat for in-stock products and organize into bootstrap grid -->
     <div
@@ -20,9 +13,7 @@
             ng-if="inStock[i]"
             class="col-md-6">
             <div class="card">
-                <a ui-sref="singleProduct({ productId: product._id })">
-                    <product-item product="inStock[i]" full="false"></product-item>
-                </a>
+                <product-item product="inStock[i]" full="false"></product-item>
             </div>
         </div>
     </div>

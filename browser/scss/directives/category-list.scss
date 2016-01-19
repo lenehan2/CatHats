@@ -11,11 +11,26 @@ product-categories {
     }
 
     ul {
+        @include primary-shadow;
+
         list-style: none;
-        background-color: black;
-        color: white;
+        width: 300px;
+        margin-top: 6px;
+        background-color: $light;
+        color: $primary;
         a {
             color: inherit;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    li {
+        margin-left: -40px;
+        padding: 2px 6px 2px 6px;
+        &:hover {
+            background-color: $white;
         }
     }
 }
