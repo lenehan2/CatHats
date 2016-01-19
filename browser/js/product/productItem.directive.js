@@ -11,8 +11,8 @@ app.directive('productItem', function (CartFactory, ProductFactory, AuthService,
         link: function (scope, element) {
             scope.inCart = false;
 
-            scope.addToCart = function () {
-                CartFactory.addProduct();
+            scope.addToCart = function (product) {
+                CartFactory.addProduct(product);
                 scope.inCart = true;
             };
 

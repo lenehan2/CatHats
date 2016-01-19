@@ -9,6 +9,7 @@ app.factory('CartFactory', function($http,AuthService) {
             }).then(response => response.data)
         },
         addProduct: function(productId) {
+            console.log(productId);
             return $http({
                     method: 'POST',
                     url: '/api/cart',
@@ -57,7 +58,7 @@ app.factory('CartFactory', function($http,AuthService) {
                     data: validOrderObj
                 })
             })
-            .then(response => response.data) 
+            .then(response => response.data)
         },
         createValidOrderObject: function(cartObj){
             var validObj = {
@@ -75,11 +76,11 @@ app.factory('CartFactory', function($http,AuthService) {
 
             //Add Payment Information
             validObj.payment = cartObj.billing;
-            
+
             //Add Shipping Information
             validObj.shipping = cartObj.shipping;
 
-            
+
             //Add Billing Address
             if(cartObj.sameAddress){
                 validObj.payment.billingAddress = cartObj.shipping;
