@@ -10,7 +10,7 @@ var Order = mongoose.model('Order');
 router.post('/', function(req, res, next) {
 	//This ensures that a user can't make themselves an admin
 	req.body.isAdmin = false;
-
+    console.log("WE IN DERE BOIII")
     User.create(req.body)
         .then(user => {
             req.logIn(user, function(loginErr) {
