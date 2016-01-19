@@ -9,9 +9,9 @@
 <!-- Recommendations Area -->
     <div class="container">
         <h3>Customer Who Bought {{ product.title }} Also Bought</h3>
-        <div ng-repeat="recommendation in recommendations" class="row">
-            <div class="card">
-                <!-- <product-item></product-item> -->{{ product._id }}
+        <div class="col-xs-12">
+            <div class="col-xs-4" ng-repeat="recommendation in recommendations">
+                <product-item product="recommendation" full="false"></product-item>
             </div>
         </div>
             
@@ -22,6 +22,6 @@
     <div ng-repeat="review in reviews">
 		<h4>Title: {{review.title}} Rating: {{review.rating}}</h4>
         <h6>{{ review.user.email }}</h6>
-		<p>{{review.description}}</p>
+		<p>{{ review.description }}</p>
 	</div>
 </div>
