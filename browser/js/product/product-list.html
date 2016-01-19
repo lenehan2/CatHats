@@ -20,9 +20,7 @@
             ng-if="inStock[i]"
             class="col-md-6">
             <div class="card">
-                <a ui-sref="singleProduct({ productId: product._id })">
-                    <product-item product="inStock[i]" full="false"></product-item>
-                </a>
+                <product-item product="inStock[i]" full="false"></product-item>
             </div>
         </div>
     </div>

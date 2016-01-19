@@ -1,7 +1,16 @@
 <div class="row">
     <h1 ng-show="editMode">EDITING</h1>
+
+    <h1 ng-if="full"
+        contenteditable="{{editMode}}"
+        ng-model="product.title"
+        class="product-title">
+    </h1>
+
     <div class="col-xs-5">
-        <img ng-src="{{product.imageUrl}}" class="img-responsive center-block">
+        <a ng-if="!canEdit" ui-sref="singleProduct({ productId: product._id })">
+            <img ng-src="{{product.imageUrl}}" class="img-responsive center-block">
+        </a>
         <div ng-show="editMode">
             Image Url: <span contenteditable="{{editMode}}" ng-model="product.imageUrl"></span>
         </div>
@@ -9,10 +18,9 @@
 
 
     <div class="col-xs-7">
-        <h3
-            contenteditable="{{editMode}}"
-            ng-model="product.title">
-        </h3>
+        <a ui-sref="singleProduct({ productId: product._id })" ng-if="!full">
+            <h3>{{product.title}}</h3>
+        </a>
 
         <p ng-hide="editMode">
             {{product.price / 100 | currency }}
@@ -63,18 +71,21 @@
             <p>More Info</p>
         </a>
 
-        <a
-            ui-sref="admin.singleProduct({ id: product._id })"
-            ng-if="!full && canEdit">
-            <p>Edit</p>
-        </a>
+        <p>
+            <a
+                ui-sref="admin.singleProduct({ id: product._id })"
+                ng-if="!full && canEdit">
+                Edit
+            </a>
+        </p>
 
         <div ng-hide="canEdit">
             <button
                 ng-click="addToCart(product._id)"
                 ng-if="product.inventory > 0 && !inCart"
                 class="primary">
-            Add to Cart
+                Add to Cart
+                <span class="fa fa-shopping-cart"></span>
             </button>
             <button
                 ui-sref="cart"
