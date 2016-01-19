@@ -19,8 +19,5 @@ app.controller('ProductsCtrl', function($scope, products){
 			)
 		}, []);
 
-
 		$scope.inStock = $scope.products.filter(product => product.inventory > 0);
-		console.log('in stock: ', $scope.inStock);
-
 })

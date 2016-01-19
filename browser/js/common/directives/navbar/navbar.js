@@ -11,7 +11,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.items = [
                 { label: 'Home', state: 'home' },
-                { label: 'About', state: 'about' },
                 { label: 'Browse', state: 'products({ categories: null, title: null })'},
                 { label: 'Cart', state: 'cart' },
                 { label: 'Admin', state: 'admin', admin: true},
@@ -29,6 +28,14 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 return AuthService.isAdmin();
             }
 
+            scope.regexName = function(email){
+                if(!email){
+                    return;
+                }
+                var emailString = email;
+                return emailString.replace(/@.*/g, "");
+            }
+
             scope.logout = function () {
                 AuthService.logout().then(function () {
                    $state.go('home');
@@ -44,6 +51,8 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             var removeUser = function () {
                 scope.user = null;
             };
+
+
 
             setUser();
 

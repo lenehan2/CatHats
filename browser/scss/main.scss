@@ -1,13 +1,27 @@
 // App variables
+// Colors
+$primary: #2c3e50;
+$light: #ecf0f1;
+$accent: #e74c3c;
 $gray: #CFD8DC;
 $white: #fdfdfd;
+
+//Fonts
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 'bold';
+}
+
+p {
+    font-family: 'Playfair Display', serif;
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: #fdfdfd;
+  background: $white;
 }
 
 @mixin clearfix {
@@ -18,15 +32,49 @@ body {
   }
 }
 
+@mixin light-hover($color) {
+    &:hover {
+        background: lighten($color, 20%);
+    }
+}
+
+@mixin primary-shadow {
+    box-shadow: 1px 1px 8px 1px rgba(0,0,0,.25);
+}
+
+@mixin raise-hover {
+    @include primary-shadow;
+    &:hover {
+        box-shadow: 1px 1px 18px 1px rgba(0,0,0,.20);
+    }
+    &:active {
+        box-shadow: 1px 1px 18px 1px rgba(0,0,0,.20);
+    }
+}
+
+@mixin button-shadows {
+    @include primary-shadow;
+
+    &:active {
+        box-shadow: 1px 1px 8px -3px black;
+        outline: none!important;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
 #main {
   padding-top: 60px;
   margin: 0 auto;
 }
 
 @import 'directives/main';
+@import 'products/main';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
-@import 'products/main';
 @import 'shared/main';
+@import "https://fonts.googleapis.com/css?family=Josefin+Sans:400,700|Playfair+Display";
