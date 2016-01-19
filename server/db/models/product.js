@@ -17,8 +17,8 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	categories: [{
-		type: String,
-		enum: categories
+		type: mongoose.Schema.Types.ObjectId,
+		ref: Category
 	}],
 	inventory: {
 		type: Number,

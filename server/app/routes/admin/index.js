@@ -2,6 +2,7 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Order = mongoose.model('Order');
+var Category = mongoose.model('Category');
 
 /*****
 admin/users -> gets all users, individual user w/ id, and all 
@@ -105,8 +106,6 @@ router.put('/users/:id', function(req, res, next) {
 //An admin can Update the status of any order
 
 router.put('/orders/:orderId', function (req, res, next) {
-	console.log("IN HERE")
-    console.log(req.order)
     var err = new Error('Not A valid order status');
     err.status = 403;
     if (req.body.status) {
@@ -123,6 +122,10 @@ router.put('/orders/:orderId', function (req, res, next) {
 
 });
 
-
+router.post('/categories', function (req, res, next) {
+	Category.create(req.body)
+		.then(category => res.json(product))
+		.then(null, next);
+});
 
 module.exports = router;
