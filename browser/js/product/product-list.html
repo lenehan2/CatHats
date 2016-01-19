@@ -2,7 +2,18 @@
     <product-categories categories="categories"/></product-categories>
     <product-search></product-search>
 
-    <div ng-repeat="product in products" ng-if="product.inventory > 0" class="card col-xs-12">
-        <product-item product="product" full="false" />
+    <!-- Repeat for in-stock products and organize into bootstrap grid -->
+    <div
+        ng-repeat="product in inStock track by $index"
+        ng-if="$index % 3 === 0"
+        class="row">
+        <div
+            ng-repeat="i in [$index, $index + 1, $index + 2]"
+            ng-if="inStock[i]"
+            class="col-xs-4">
+            <div class="card">
+                <product-item product="inStock[i]" full="false"></product-item>
+            </div>
+        </div>
     </div>
 </div>

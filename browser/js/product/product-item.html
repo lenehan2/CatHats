@@ -72,9 +72,15 @@
         <div ng-hide="canEdit">
             <button
                 ng-click="addToCart(product._id)"
-                ng-if="product.inventory > 0"
+                ng-if="product.inventory > 0 && !inCart"
                 class="btn btn-primary">
             Add to Cart
+            </button>
+            <button
+                ui-sref="cart"
+                ng-if="inCart"
+                class="btn btn-primary">
+            View Cart
             </button>
             <p ng-if="product.inventory === 0">Out of stock!</p>
         </div>
