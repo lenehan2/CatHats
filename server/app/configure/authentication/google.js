@@ -9,12 +9,12 @@ module.exports = function (app) {
 
     var googleConfig = app.getValue('env').GOOGLE;
 
-
     var googleCredentials = {
         clientID: googleConfig.clientID,
         clientSecret: googleConfig.clientSecret,
         callbackURL: googleConfig.callbackURL
     };
+
     console.log('GOOGLE: ', googleCredentials);
 
     //this is the data coming back from google
