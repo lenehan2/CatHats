@@ -62,6 +62,11 @@
             product="product">
         </edit-product-categories>
 
+        <h4
+            ng-if="canEdit && product.featured">
+            Featured
+        </h4>
+
         <p
             ng-if="full"
             contenteditable="{{editMode}}"

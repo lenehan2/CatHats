@@ -4,7 +4,7 @@ var User = mongoose.model('User');
 var Order = mongoose.model('Order');
 
 /*****
-admin/users -> gets all users, individual user w/ id, and all 
+admin/users -> gets all users, individual user w/ id, and all
 of a specific users orders
 
 admin/orders -> can update status of specific order
@@ -69,7 +69,7 @@ router.get('/orders', function(req, res, next){
 		.then(null, next)
 })
 
-//GET A SPECIFIC USER AS ADMIN 
+//GET A SPECIFIC USER AS ADMIN
 
 router.get('/users/:id',function(req, res, next){
 	res.status(200).json(req.foundUser)
@@ -94,13 +94,20 @@ router.get('/orders/:orderId',function(req,res,next){
 
 //Allows an admin to update a users information, including isAdmin!
 
-router.put('/users/:id', function(req, res, next) {   
+router.put('/users/:id', function(req, res, next) {
     Object.keys(req.body).forEach(function(key) {
         req.foundUser[key] = req.body[key];
     });
     req.foundUser.save()
     .then(user => res.status(204).json(req.foundUser))
-})
+});
+
+//Allows an admin to delete a user
+router.delete('/users/:id', function (req, res, next) {
+	User.remove({ _id: req.params.id })
+		.then(() => res.status(204).send())
+		.then(null, next);
+});
 
 //An admin can Update the status of any order
 
