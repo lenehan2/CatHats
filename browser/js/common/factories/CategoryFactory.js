@@ -14,7 +14,7 @@ app.factory('CategoryFactory', function($http){
 
 		fetchAll: function(categoryName){
 			return $http({
-				method: 'POST',
+				method: 'GET',
 				url: '/api/categories'
 			});
 		}
