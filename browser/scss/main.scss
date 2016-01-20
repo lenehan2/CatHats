@@ -5,9 +5,13 @@ $light: #ecf0f1;
 $accent: #e74c3c;
 $gray: #CFD8DC;
 $white: #fdfdfd;
-
 //Fonts
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 'bold';
 }
@@ -17,19 +21,19 @@ p {
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  background: $white;
+    background: $white;
 }
 
 @mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 @mixin light-hover($color) {
@@ -39,35 +43,103 @@ body {
 }
 
 @mixin primary-shadow {
-    box-shadow: 1px 1px 8px 1px rgba(0,0,0,.25);
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, .25);
 }
 
 @mixin raise-hover {
     @include primary-shadow;
     &:hover {
-        box-shadow: 1px 1px 18px 1px rgba(0,0,0,.20);
+        box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, .20);
     }
     &:active {
-        box-shadow: 1px 1px 18px 1px rgba(0,0,0,.20);
+        box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, .20);
     }
 }
 
 @mixin button-shadows {
     @include primary-shadow;
-
     &:active {
         box-shadow: 1px 1px 8px -3px black;
         outline: none!important;
     }
-
     &:focus {
         outline: none;
     }
 }
 
 #main {
-  padding-top: 60px;
-  margin: 0 auto;
+    padding-top: 60px;
+    margin: 0 auto;
+}
+
+.fa {
+    font-size: 25px;
+    color: $accent;
+}
+
+.catContainer {
+    position: relative;
+    clear: right;
+    text-align: center;
+    height: 500px;
+    width: 500px;
+}
+
+.catImage {}
+
+.sample-show-hide {
+    padding: 10px;
+}
+
+.sample-show-hide {
+    -webkit-transition: all linear 1.2s;
+    transition: all linear 1.2s;
+}
+
+.sample-show-hide.ng-hide {
+    opacity: 0;
+}
+
+#landingPage {
+    width: 100%;
+    height: 100%;
+    background: $primary;
+    text-align: center;
+    h1 {
+        padding-top: 130px;
+        padding-left: 50%;
+        position: absolute;
+        z-index: 4;
+        margin: 0 auto;
+    }
+}
+
+#main.landingPage {
+    margin: 0;
+    padding-top: 0;
+    width: 100%;
+    height: 100vh;
+    background: $primary;
+}
+
+.testing {
+    position: relative;
+    text-align: center;
+    h1 {
+        font-size: 4em;
+        color: white;
+        left: -30vh;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        float: left;
+    }
+    h2 {
+        color: white;
+        font-size: 4em;
+        padding-top: 0px;
+        bottom: 50px;
+    }
 }
 
 @import 'directives/main';

@@ -1,8 +1,8 @@
 app.config(function ($stateProvider) {
 
     // Register our *about* state.
-    $stateProvider.state('about', {
-        url: '/about',
+    $stateProvider.state('landingPage', {
+        url: '/',
         controller: 'AboutController',
         templateUrl: 'js/about/about.html'
     });
@@ -12,6 +12,5 @@ app.config(function ($stateProvider) {
 app.controller('AboutController', function ($scope, FullstackPics) {
 
     // Images of beautiful Fullstack people.
-    $scope.images = _.shuffle(FullstackPics);
 
 });
