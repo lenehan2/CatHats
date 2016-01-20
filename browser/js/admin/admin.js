@@ -19,10 +19,14 @@ app.config(function ($stateProvider) {
         resolve: {
             products: function (ProductFactory) {
                 return ProductFactory.getProducts();
+            },
+            categories: function (CategoryFactory) {
+                return CategoryFactory.fetchAll();
             }
         },
-        controller: function ($scope, products) {
+        controller: function ($scope, products, categories) {
             $scope.products = products;
+            $scope.categories = categories;
         }
     });
 

@@ -38,23 +38,18 @@ var schema = new mongoose.Schema({
 	}
 });
 
-schema.pre('validate', function(next){
-	console.log("this", this);
-	var promises = this.categories.map(function(category){
-		console.log("category", category)
-		return Category.find({name: category})
-			// .then(function(categoryFromDB){
-			// 	console.log("categoryFromDB", categoryFromDB);
-			// 	return categoryFromDB._id;
-			// })
-	})
-	console.log("promises", promises);
-	Promise.all(promises)
-		.then(function(categories){
-			console.log("categories", categories);
-			this.categories = categories
-			next();
-		})
-})
+// schema.pre('validate', function(next){
+// 	var promises = this.categories.map(function(category){
+// 		return Category.find({name: category})
+// 			// .then(function(categoryFromDB){
+// 			// 	return categoryFromDB._id;
+// 			// })
+// 	})
+// 	Promise.all(promises)
+// 		.then(function(categories){
+// 			this.categories = categories
+// 			next();
+// 		})
+// })
 
 mongoose.model('Product', schema);

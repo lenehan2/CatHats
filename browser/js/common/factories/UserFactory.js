@@ -50,7 +50,6 @@ app.factory('UserFactory', function($http, AuthService){
 		},
 
 		deleteUser: function (userId) {
-			console.log('deleting ', userId)
 			return $http({
 				method: 'DELETE',
 				url: '/api/admin/users/' + userId

@@ -16,7 +16,8 @@ app.factory('CategoryFactory', function($http){
 			return $http({
 				method: 'GET',
 				url: '/api/categories'
-			});
+			})
+            .then(res => res.data);
 		}
 
 	};

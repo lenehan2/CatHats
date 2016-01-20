@@ -51,14 +51,14 @@
         <h4 ng-hide="editMode">
             <span ng-repeat="category in product.categories"><!--
             --><span ng-if="$index > 0">, </span><!--
-            -->{{category}}<!--
+            -->{{category.name}}<!--
             --></span>
         </h4>
 
         <!-- Good reason to make a category schema in db -->
         <edit-product-categories
             ng-show="editMode"
-            categories="['Costumes', 'Formal', 'Seasonal', 'Outerware']"
+            categories="categories"
             product="product">
         </edit-product-categories>
 

@@ -25,7 +25,6 @@ router.param('id',function(req,res,next,id){
 	.populate('orders')
 	.then(user => {
 		if(!user){
-			console.log("THIS SHOULDNT BE HIT")
 			var err = new Error('Not Found');
 			err.status = 404
 			next(err)
@@ -40,12 +39,10 @@ router.param('orderId',function(req,res,next,id){
 	Order.findById(id)
 	.then(order => {
 		if(!order){
-			console.log(":(")
 			var err = new Error('Not Found');
 			err.status = 404
 			next(err)
 		}else{
-			console.log(":)", req.foundOrder)
 			req.foundOrder = order;
 			next();
 		}
@@ -64,7 +61,6 @@ router.get('/users', function(req, res, next) {
 
 router.get('/orders', function(req, res, next){
 	var params = req.query || {};
-	console.log("Params from admin:65: ",params)
 	Order.find(params).exec()
 		.then(orders => res.status(200).json(orders))
 		.then(null, next)
@@ -87,7 +83,6 @@ router.get('/users/:id/orders',function(req,res,next){
 //Get an order by ID
 
 router.get('/orders/:orderId',function(req,res,next){
-	console.log('order: ', req.foundOrder)
 	res.status(200).send(req.foundOrder)
 });
 
@@ -119,7 +114,6 @@ router.put('/orders/:orderId', function (req, res, next) {
         req.foundOrder.status = req.body.status;
         req.foundOrder.save()
             .then((order) => {
-            	console.log("UPDATED ORDER: ", order)
             	res.status(200).json(order)
             })
             .then(null, next);
