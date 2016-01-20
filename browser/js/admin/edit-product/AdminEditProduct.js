@@ -6,13 +6,17 @@ app.config(function ($stateProvider) {
         resolve: {
             product: function (ProductFactory, $stateParams) {
                 return ProductFactory.getSingleProduct($stateParams.id);
+            },
+            categories: function (CategoryFactory) {
+                return CategoryFactory.fetchAll();
             }
         }
     });
 });
 
-app.controller('AdminEditProductCtrl', function ($scope, $state, product, ProductFactory) {
+app.controller('AdminEditProductCtrl', function ($scope, $state, product, categories, ProductFactory) {
     $scope.product = product;
+    $scope.categories = categories;
     $scope.deleting = false;
 
     $scope.attemptDeletion = function () {

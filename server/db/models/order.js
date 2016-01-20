@@ -55,7 +55,6 @@ schema.post('save', function() {
                     // testing: 'TEST',
             });
 
-            // console.log("email: ", email)
             //un-comment out to get emails to send
             // Mandrill.sendEmail('User','testfullstackproject@gmail.com','CatHats','testfullstackproject@gmail.com','Order Confirmation',email)
         })

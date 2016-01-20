@@ -4,7 +4,6 @@ app.config(function($stateProvider) {
         templateUrl: '/js/admin.orders/orders.html',
         resolve: {
             orders: function(OrderFactory, $stateParams) {
-            	console.log('Params: from orders.js ', $stateParams)
                 return OrderFactory.adminGetAllOrders($stateParams)
             }
         },
@@ -23,7 +22,7 @@ app.config(function($stateProvider) {
                 label: 'Status',
                 value: 'status'
             }];
-            
+
         }
     })
 })
@@ -45,7 +44,7 @@ app.config(function($stateProvider) {
                     $state.reload()
                 })
             }
-                
+
             $scope.test = "TEST"
         }
     })

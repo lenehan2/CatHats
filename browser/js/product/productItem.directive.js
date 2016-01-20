@@ -5,7 +5,8 @@ app.directive('productItem', function (CartFactory, ProductFactory, AuthService,
             product: '=',
             averageRating: '=',
             full: '=',
-            canEdit: '='
+            canEdit: '=',
+            categories: '='
         },
         templateUrl: 'js/product/product-item.html',
         link: function (scope, element) {
@@ -23,8 +24,6 @@ app.directive('productItem', function (CartFactory, ProductFactory, AuthService,
             };
 
             scope.save = function (newData) {
-
-                console.log(newData);
                 ProductFactory.updateProduct(scope.product._id, newData)
                     .then(function () {
                         scope.toggleEditMode();
