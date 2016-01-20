@@ -5,10 +5,15 @@ app.config(function ($stateProvider) {
         resolve: {
         	featured: function(ProductFactory){
         		return ProductFactory.getProducts({featured: true})
-        	}
+        	},
+            categories: function (CategoryFactory) {
+                return CategoryFactory.fetchAll();
+            }
         },
-        controller: function($scope,featured){
+        controller: function($scope,featured, categories){
         	$scope.featured = featured;
+            $scope.categories = categories;
+            console.log($scope.categories);
         }
     });
 });
