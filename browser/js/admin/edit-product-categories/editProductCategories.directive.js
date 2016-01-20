@@ -26,6 +26,7 @@ app.directive('editProductCategories', function () {
             function updateCategories() {
                 const checkboxes = [].slice.call(element.find('input'));
 
+
                 return checkboxes.reduce(function (acc, curr) {
                     if (curr.checked) acc.push(curr.value);
                     return acc;
