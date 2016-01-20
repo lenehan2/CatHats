@@ -8,6 +8,7 @@ router.use('/user' , require('./user'));
 router.use('/products', require('./products'));
 router.use('/admin',require('./admin'));
 router.use('/categories', require('./categories'));
+router.use('/recommendations', require('./recommendations'));
 
 //***Note, orders route is nested inside of user route***///
 
