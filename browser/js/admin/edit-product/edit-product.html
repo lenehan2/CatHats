@@ -2,9 +2,19 @@
     <product-item
         class="col-xs-12"
         product="product"
+        categories="categories"
         can-edit="true"
         full="true">
     </product-item>
+    <button
+        ng-click="changedFeatured(product)">
+        <span ng-show="!product.featured">
+            Mark as featured
+        </span>
+        <span ng-show="product.featured">
+            Remove featured
+        </span>
+    </button>
     <button
         ng-click="deleting = true"
         ng-show="!deleting"

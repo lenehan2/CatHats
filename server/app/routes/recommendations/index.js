@@ -1,21 +1,11 @@
-require('./db');
-var express = require('express');
+var router = require('express').Router();
 var Promise = require('bluebird');
 var mongoose = require('mongoose');
 var Order = mongoose.model('Order');
 var Product = mongoose.model('Product')
 var _ = require('lodash');
 
-var app = express();
-var port = process.env.REC_PORT || 8080;
-
-app.use(function(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-})
-
-app.get('/api/recommendations/:productId', function (req, res, next) {
+router.get('/:productId', function (req, res, next) {
     Order.find()
         .where('products.product', req.params.productId)
         .then(orders => {
@@ -46,6 +36,4 @@ function parseOrders (productId, orders) {
     return sorted;
 }
 
-app.listen(port, function () {
-    console.log('Rec Engine app listening on port ', port);
-});
+module.exports = router;

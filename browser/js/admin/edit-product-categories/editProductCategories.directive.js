@@ -16,8 +16,16 @@ app.directive('editProductCategories', function () {
                 scope.product.categories = updateCategories();
             });
 
+            scope.hasCategory = function (product, category) {
+                for (var i = 0; i < product.categories.length; i++) {
+                    if (product.categories[i]._id === category._id) return true;
+                }
+                return false;
+            }
+
             function updateCategories() {
                 const checkboxes = [].slice.call(element.find('input'));
+
 
                 return checkboxes.reduce(function (acc, curr) {
                     if (curr.checked) acc.push(curr.value);

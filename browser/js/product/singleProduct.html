@@ -1,16 +1,38 @@
-
 <div class="container">
     <product-item
-        class="col-xs-12"
+        class="col-xs-12 product-full"
         product="product"
         average-rating="averageRating"
         full="true">
     </product-item>
+
+<!-- Recommendations Area -->
+    <div class="container">
+        <h3>Customer Who Bought {{ product.title }} Also Bought</h3>
+        <div class="col-xs-12">
+            <div class="col-xs-4" ng-repeat="recommendation in recommendations">
+                <product-item product="recommendation" full="false"></product-item>
+            </div>
+        </div>
+            
+    </div>
+
     <h3> Avg Rating: {{averageRating}} </h3>
-    <h5 ng-if="user"><add-review><add-review></h5>
-    <div ng-repeat="review in reviews">
-		<h4>Title: {{review.title}} Rating: {{review.rating}}</h4>
-        <h6>{{ review.user.email }}</h6>
-		<p>{{review.description}}</p>
-	</div>
+
+    <button ng-if="user" ng-click="toggleReviewForm()">
+        <span ng-show="!showReviewForm">Add a Review</span>
+        <span ng-show="showReviewForm">Cancel</span>
+    </button>
+    <h5 ng-if="showReviewForm">
+        <add-review><add-review>
+    </h5>
+    <div ng-init="limit = 3">
+        <div ng-repeat="review in reviews | limitTo: limit">
+            <h4>Title: {{review.title}} Rating: {{review.rating}}</h4>
+            <h6>{{ review.user.email }}</h6>
+            <p>{{review.description}}</p>
+        </div>
+    </div>
+    <button ng-show="limit<reviews.length" ng-click="limit = limit +3">show more...</button>
+    <button ng-show="limit>3" ng-click="limit = 3">show less</button>
 </div>

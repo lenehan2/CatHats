@@ -1,8 +1,9 @@
 <div ng-repeat="category in categories" class="form-control">
     <input
         type="checkbox"
-        ng-value="category"
-        ng-checked="product.categories.length && product.categories.indexOf(category) !== -1"
+        ng-value="category._id"
+        ng-checked="product.categories.length &&
+                    hasCategory(product, category)"
         class="category-selector">
-    {{category}}
+    {{category.name}}
 </div>

@@ -10,7 +10,13 @@ var schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator: function (em) {
+                return /^\w+@\w+\.\w+$/.test(em);
+            },
+            message: '{VALUE} is not a valid email address'
+        }
     },
     password: {
         type: String,
@@ -75,8 +81,6 @@ schema.methods.addToCart = function (newItems) {
 
     newItems.forEach(newItem => {
          var existing = this.cart.find(cartItem => {
-            console.log('cartItem: ',cartItem)
-            console.log('newItem: ',newItem)
 
             return cartItem.product.toString() === newItem.product.toString();
         });

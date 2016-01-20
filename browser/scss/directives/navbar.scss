@@ -1,7 +1,7 @@
 navbar {
 
   display: block;
-  background: white;
+  background: $primary;
   border-bottom: 1px solid black;
   box-shadow: 1px 1px 14px -3px black;
 
@@ -18,7 +18,7 @@ navbar {
   }
 
   a {
-    color: black;
+    color: $white;
     font-size: 16px;
   }
 
@@ -26,7 +26,7 @@ navbar {
     cursor: pointer;
     transition: color 0.2s;
     &.active {
-      color: darken(#f31214, 10%);
+      color: darken($accent, 10%);
     }
     &:hover {
       background: none;
@@ -41,15 +41,15 @@ navbar {
     float: right;
     border: 1px solid black;
     margin-top: 10px;
-    background: none;
+    background: $white;
     outline: none !important;
   }
 
   .welcome {
     float: right;
-    margin-top: 12px;
+    margin: 14px 16px 0 0;
     span {
-      color: black;
+      color: $light;
       font-size: 16px;
       margin-right: 5px;
     }
@@ -60,10 +60,13 @@ navbar {
   }
 
   #profile-dropdown {
+      button {
+          font-family: 'Playfair Display';
+          font-weight: bold;
+      }
       float: right;
       li {
           cursor: pointer;
       }
   }
-
 }

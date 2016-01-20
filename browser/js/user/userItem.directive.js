@@ -13,13 +13,22 @@ app.directive('userItem', function(UserFactory, $state) {
 					.then(function () {
 						$state.reload();
 					});
-			},
-			scope.newPassword = function () {
+			};
+
+            scope.newPassword = function () {
 				UserFactory.newPassword(scope.user._id)
 				.then(function (){
 					$state.reload();
 				})
-			}
+			};
+
+            scope.deleteUser = function (userId) {
+                UserFactory.deleteUser(userId)
+                    .then(() => $state.reload())
+                    .then(null, err => $scope.error = err);
+            };
+
+
 		}
 	}
 })

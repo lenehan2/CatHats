@@ -5,7 +5,6 @@ app.config(function ($stateProvider) {
         controller: 'OrdersCtrl',
         resolve: {
             orders: function (OrderFactory, $stateParams) {
-                console.log($stateParams.id)
                 return OrderFactory.getCurrentUsersOrders();
             }
         }
@@ -33,19 +32,23 @@ app.controller('OrderCtrl', function ($scope, order) {
     $scope.order = order;
 });
 
-app.directive('orderItem', function () {
+app.directive('orderItem', function (OrderFactory, $state) {
     return {
         restrict: 'E',
         scope: {
             order: '=',
             full: '=',
-            cancel: '='
         },
         templateUrl: 'js/orders/order-item.html',
         link: function (scope) {
             scope.totalPrice = scope.order.products.reduce(function (acc, curr) {
                 return acc + (curr.price * curr.quantity);
             }, 0);
+
+            scope.cancel = function (orderId) {
+                OrderFactory.cancelOrder(orderId)
+                    .then(() => $state.reload());
+            };
         }
     }
 });

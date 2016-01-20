@@ -1,4 +1,4 @@
-app.factory('CartFactory', function($http,AuthService) {
+app.factory('CartFactory', function($http, AuthService) {
 
 
     var cartFactoryObj = {
@@ -9,7 +9,6 @@ app.factory('CartFactory', function($http,AuthService) {
             }).then(response => response.data)
         },
         addProduct: function(productId) {
-            console.log(productId);
             return $http({
                     method: 'POST',
                     url: '/api/cart',
@@ -19,7 +18,6 @@ app.factory('CartFactory', function($http,AuthService) {
                     }
                 })
                 .then(response => {
-                    console.log('server response: ', response.data);
                     return response.data
                 })
         },
@@ -38,12 +36,9 @@ app.factory('CartFactory', function($http,AuthService) {
         },
         removeItem: function(productId,cart){
         	var newCart = cart.filter(function(item){
-        		// console.log("productId: ",productId)
-        		// console.log("cart: ",cart)
 
         		return item.product._id.toString() !== productId.toString();
         	});
-        	console.log(newCart)
         	return cartFactoryObj.updateCart(newCart)
         },
         checkout: function(order){

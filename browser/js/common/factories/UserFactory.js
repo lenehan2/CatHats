@@ -1,5 +1,5 @@
 app.factory('UserFactory', function($http, AuthService){
-	
+
 	return {
 
 		fetchAll: function(){
@@ -17,7 +17,7 @@ app.factory('UserFactory', function($http, AuthService){
 		},
 
 		signup: function(user){
-			return $http.post('/api/users/', user)
+			return $http.post('/api/user/', user)
 			.then(AuthService.getLoggedInUser.bind(AuthService));
 		},
 
@@ -47,6 +47,13 @@ app.factory('UserFactory', function($http, AuthService){
 				data: { password: newPass, requireNewPasswordOnLogin: false },
 			}).then(res => res.data)
 			.then(null, console.error.bind(console))
+		},
+
+		deleteUser: function (userId) {
+			return $http({
+				method: 'DELETE',
+				url: '/api/admin/users/' + userId
+			});
 		}
 
 	}

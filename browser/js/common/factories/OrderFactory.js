@@ -8,6 +8,14 @@ app.factory('OrderFactory', function ($http) {
                 .then(null, err => console.error(err));
         },
 
+        cancelOrder: function (orderId) {
+            return $http({
+                method: 'PUT',
+                url: '/api/user/orders/' + orderId,
+                data: { status: 'Cancelled' }
+            });
+        },
+
         adminDeleteOrder: function(orderId){
             return $http({
                 method: 'PUT',

@@ -1,12 +1,18 @@
 <div class="container">
-    <p ng-show='cart.length === 0'>You have no items, buy something, ya dingus!</p>
+    <div ng-show='cart.length === 0'>
+        <h3>You have no items, buy something, ya dingus!</h3>
+        <h4><a ui-sref="products">Browse All Products</a></h4>
+    </div>
     <form>
 	    <div ng-repeat="item in cart">
 	        <p>{{item.product.title}}</p>
 	        <input type="number" min='1' ng-model="item.quantity" ng-change="updateCart(cart)">
 	        <button ng-click="removeItem(item.product._id,cart)">Remove</button>
 	    </div>
-	    <input type="submit" value="Update Cart">
-	    <button ui-sref="checkout">Check Out</button>
+	    <button
+            ui-sref="checkout"
+            ng-show="cart.length > 0">
+            Check Out
+        </button>
     </form>
 </div>

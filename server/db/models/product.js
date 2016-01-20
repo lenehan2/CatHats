@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-
-var categories = ['Seasonal','Costumes','Formal','Outerware'];
+var Category = mongoose.model('Category');
+var Promise = require('bluebird');
 
 var schema = new mongoose.Schema({
 	title: {
@@ -17,8 +17,8 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	categories: [{
-		type: String,
-		enum: categories
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Category'
 	}],
 	inventory: {
 		type: Number,
@@ -37,5 +37,19 @@ var schema = new mongoose.Schema({
 		default: false
 	}
 });
+
+// schema.pre('validate', function(next){
+// 	var promises = this.categories.map(function(category){
+// 		return Category.find({name: category})
+// 			// .then(function(categoryFromDB){
+// 			// 	return categoryFromDB._id;
+// 			// })
+// 	})
+// 	Promise.all(promises)
+// 		.then(function(categories){
+// 			this.categories = categories
+// 			next();
+// 		})
+// })
 
 mongoose.model('Product', schema);

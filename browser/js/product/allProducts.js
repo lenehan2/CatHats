@@ -5,22 +5,17 @@ app.config(function($stateProvider){
 		resolve: {
 			products: function (ProductFactory, $stateParams) {
 				return ProductFactory.getProducts($stateParams);
-			}
+			},
+            categories: function (CategoryFactory) {
+                return CategoryFactory.fetchAll();
+            }
 		},
 		controller: 'ProductsCtrl'
 	})
 });
 
-app.controller('ProductsCtrl', function($scope, products){
+app.controller('ProductsCtrl', function($scope, products, categories){
 		$scope.products = products;
-		$scope.categories = products.reduce((acc, curr) => {
-			return acc.concat(
-				curr.categories.filter(cat => acc.indexOf(cat) === -1)
-			)
-		}, []);
-
-
+        $scope.categories = categories;
 		$scope.inStock = $scope.products.filter(product => product.inventory > 0);
-		console.log('in stock: ', $scope.inStock);
-
 })

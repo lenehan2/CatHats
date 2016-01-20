@@ -6,15 +6,21 @@
         class="form-control product-form"
     >
     <ul class="category-list">
-        <li ng-repeat="category in categories | filter : query">
-            <a ui-sref="products({ categories: category })">
-                {{category}}
+        <div ng-repeat="category in categories | filter : query">
+            <a ui-sref="products({ categories: category._id })">
+                <li>
+                    <h4>
+                        {{category.name}}
+                    </h4>
+                </li>
             </a>
-        </li>
-        <li>
-            <a ui-sref="products({ categories: null, title: null })">
-                All
-            </a>
-        </li>
+        </div>
+        <a ui-sref="products({ categories: null, title: null })">
+            <li>
+                <h4>
+                    All
+                </h4>
+            </li>
+        </a>
     </ul>
 </div>

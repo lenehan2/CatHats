@@ -27,6 +27,14 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 return AuthService.isAdmin();
             }
 
+            scope.regexName = function(email){
+                if(!email){
+                    return;
+                }
+                var emailString = email;
+                return emailString.replace(/@.*/g, "");
+            }
+
             scope.logout = function () {
                 AuthService.logout().then(function () {
                    $state.go('landingPage');
@@ -46,6 +54,8 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             var removeUser = function () {
                 scope.user = null;
             };
+
+
 
             setUser();
 

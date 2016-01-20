@@ -43,7 +43,7 @@
         </div>
 
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
+            <span>Welcome, {{ regexName(user.email) }}!</span>
         </div>
     </div>
 </nav>
