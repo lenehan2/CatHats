@@ -107,10 +107,14 @@ body {
     text-align: center;
     h1 {
         padding-top: 130px;
-        padding-left: 50%;
+        padding-left: 20vw;
         position: absolute;
         z-index: 4;
         margin: 0 auto;
+    }
+    h2 {
+        position: relative;
+        bottom: 50px;
     }
 }
 
@@ -125,20 +129,46 @@ body {
 .testing {
     position: relative;
     text-align: center;
-    h1 {
-        font-size: 4em;
-        color: white;
-        left: -30vh;
+    div{
         position: absolute;
         text-align: center;
         width: 100%;
         float: left;
+    }
+    h1 {
+        font-size: 4em;
+        color: white;
+        padding: 0;
+        // left: -20vw;
+        
     }
     h2 {
         color: white;
         font-size: 4em;
         padding-top: 0px;
         bottom: 50px;
+    }
+}
+
+.categoryBox {
+    padding: 10px;
+    >div{
+        height: 300px;
+        border-radius: 10%;
+        text-align: center;
+        background: $primary;
+        vertical-align: center;
+        padding-top: 70px;
+    }
+    span,
+    h4 {
+        font-size: 5em;
+    }
+    .glyphicon {
+        color: $accent;
+    }
+    h4 {
+        color: white;
     }
 }
 
