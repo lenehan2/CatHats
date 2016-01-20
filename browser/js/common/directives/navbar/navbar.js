@@ -11,11 +11,9 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.items = [
                 { label: 'Home', state: 'home' },
-                { label: 'About', state: 'about' },
                 { label: 'Browse', state: 'products({ categories: null, title: null })'},
                 { label: 'Cart', state: 'cart' },
-                { label: 'Admin', state: 'admin', admin: true},
-                { label: 'Test State', state: 'about'}
+                { label: 'Admin', state: 'admin', admin: true}
 
             ];
 
@@ -31,9 +29,13 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.logout = function () {
                 AuthService.logout().then(function () {
-                   $state.go('home');
+                   $state.go('landingPage');
                 });
             };
+
+            scope.isState = function(){
+                return $state.is("home")
+            }
 
             var setUser = function () {
                 AuthService.getLoggedInUser().then(function (user) {

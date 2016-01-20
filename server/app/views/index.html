@@ -17,8 +17,9 @@
     <script src="/main.js"></script>
     <script src="/angular-bootstrap-rating/ui-bootstrap-ratings.js"></script>
 </head>
-<body ng-app="FullstackGeneratedApp">
-    <navbar ng-show="landingPage"></navbar>
-    <div id="main" ui-view></div>
+<body ng-app="FullstackGeneratedApp" ng-controller="LandingPageCtrl">
+    <navbar ng-hide='isState()'></navbar>
+    
+    <div id="main" ng-class = "{landingPage: isState()}" ui-view></div>
 </body>
 </html>
