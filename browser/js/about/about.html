@@ -1,11 +1,11 @@
-<section id="about">
-    <p>
-        This website--the very one at which you currently gaze--was created by a basic scaffolding
-        concocted at Fullstack Academy. Here are some of the people who make it all very real:
-    </p>
-    <carousel interval="2000">
-        <slide ng-repeat="image in images">
-            <img height="300" ng-src="{{ image }}" />
-        </slide>
-    </carousel>
-</section>
+<div id="landingPage">
+    <section>
+        <div class="catContainer">
+            <img src="cathats_logobase2.png" ng-show="show" class="catImage img-responsive" alt="">
+            <img src="cathats_logobasegood.png" ng-show="!show" class="catImage sample-show-hide img-responsive" alt="">
+            <div class="col-xs-12">
+                <button ng-click="show =!show">Switch it</button>
+            </div>
+        </div>
+    </section>
+</div>

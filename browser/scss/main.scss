@@ -75,6 +75,38 @@ body {
     color: $accent;
 }
 
+.catContainer {
+    position: relative;
+    clear: right;
+}
+
+.catImage {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border: 1px solid red;
+}
+
+.sample-show-hide {
+  padding:10px;
+  border:1px solid black;
+  background:white;
+}
+
+.sample-show-hide {
+  -webkit-transition:all linear 1.2s;
+  transition:all linear 1.2s;
+}
+
+.sample-show-hide.ng-hide {
+  opacity:0;
+}
+
+#landingPage {
+    width: 900px;
+    height: 900px;
+    background: $primary;
+}
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
