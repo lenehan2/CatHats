@@ -5,7 +5,7 @@ var Product = mongoose.model('Product');
 var Review = mongoose.model('Review');
 
 router.param('id', function (req, res, next, id) {
-    Product.findById(id)
+    Product.findById(id).populate('categories')
     .then(product => {
         if (!product) {
             var err = new Error('Not found');
@@ -25,7 +25,7 @@ router.get('/', function (req, res, next) {
     //convert title query to regex so it can get partial matches
     if (req.query.title) req.query.title = new RegExp(req.query.title, 'gi');
 
-    Product.find(req.query)
+    Product.find(req.query).populate('categories')
         .then(products => {
             console.log(products);
             return products;
