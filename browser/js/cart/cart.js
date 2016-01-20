@@ -11,18 +11,22 @@ app.config(function($stateProvider) {
     })
 })
 
-app.controller('cartCtrl', function($scope, cart, CartFactory) {
+app.controller('cartCtrl', function($scope, cart, CartFactory, $state) {
     $scope.cart = cart;
-    $scope.order = {cart: cart};
+    $scope.order = {
+        cart: cart
+    };
     $scope.updateCart = CartFactory.updateCart;
-    $scope.removeItem = function(productId,cartObj){
+    $scope.removeItem = function(productId, cartObj) {
 
-    	CartFactory.removeItem(productId,cartObj)
-    	.then(updatedCart => $scope.cart=updatedCart)
+        CartFactory.removeItem(productId, cartObj)
+            .then(updatedCart => $scope.cart = updatedCart)
 
     }
-    $scope.placeOrder = function (order){
-        CartFactory.checkout(order);
+    $scope.placeOrder = function(order) {
+        console.log(order)
+            CartFactory.checkout(order)
+                .then(order => $state.go('order',{id: order._id}))
     }
 
 })

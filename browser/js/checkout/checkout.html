@@ -1,5 +1,8 @@
 <div class="container">You're Checking Out
     <form ng-submit="placeOrder(order)" novalidate>
+        <alert type="danger" ng-show="error">
+            {{ error }}
+        </alert>
         <div class="container">
             <h3>Please input shipping information</h3> Full Name:
             <input name="shippingFullName" type="text" required ng-model="order.shipping.name"> Address line 1:
@@ -24,7 +27,7 @@
             <input name="shippingFullName" type="text" required ng-model="order.billingAddress.name" ng-disabled="order.sameAddress"> Address line 1:
             <input name="address" type="text" required ng-model="order.billingAddress.streetAddress" ng-disabled="order.sameAddress"> City:
             <input name="city" type="text" required ng-model="order.billingAddress.city" ng-disabled="order.sameAddress"> State:
-            <input name="state" type="text" required ng-model="order.billingAddress.state" ng-disabled="order.sameAddress">  ZIP:
+            <input name="state" type="text" required ng-model="order.billingAddress.state" ng-disabled="order.sameAddress"> ZIP:
             <input name="zip" type="text" required ng-model="order.billingAddress.zip" ng-disabled="order.sameAddress">
         </div>
         <button type='submit'>Place Order</button>

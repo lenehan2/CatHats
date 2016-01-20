@@ -45,6 +45,7 @@ app.factory('CartFactory', function($http, AuthService) {
             //Nested promises? This doesn't feel right
             //but I need to get the user first, then make
             //a put request using that object
+           var order;
            return cartFactoryObj.createValidOrderObject(order)
             .then(validOrderObj =>{
                 return $http({
@@ -53,7 +54,10 @@ app.factory('CartFactory', function($http, AuthService) {
                     data: validOrderObj
                 })
             })
-            .then(response => response.data)
+            .then(response => {
+                console.log("DATA",response.data)
+                return response.data
+            })
         },
         createValidOrderObject: function(cartObj){
             var validObj = {
