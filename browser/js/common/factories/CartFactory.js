@@ -1,4 +1,4 @@
-app.factory('CartFactory', function($http,AuthService) {
+app.factory('CartFactory', function($http, AuthService) {
 
 
     var cartFactoryObj = {

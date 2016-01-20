@@ -1,8 +1,6 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
-
-var Product = mongoose.model('Product');
 var Order = mongoose.model('Order');
 
 router.param('id', function (req, res, next, id) {

@@ -13,6 +13,7 @@ app.config(function($stateProvider){
 
 app.controller('ProductsCtrl', function($scope, products){
 		$scope.products = products;
+		console.log(products);
 		$scope.categories = products.reduce((acc, curr) => {
 			return acc.concat(
 				curr.categories.filter(cat => acc.indexOf(cat) === -1)
