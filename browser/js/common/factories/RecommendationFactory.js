@@ -1,5 +1,5 @@
 app.factory('RecommendationFactory', function($http, ProductFactory, $q) {
-	
+
 	return {
 
 		getRecommendations: function(productId){
@@ -7,7 +7,7 @@ app.factory('RecommendationFactory', function($http, ProductFactory, $q) {
 
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/api/recommendations/' + productId
+                url: '/api/recommendations/' + productId
             })
             .then(function(response){
                 return response.data;
