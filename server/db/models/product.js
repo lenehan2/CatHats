@@ -18,7 +18,7 @@ var schema = new mongoose.Schema({
 	},
 	categories: [{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: Category
+		ref: 'Category'
 	}],
 	inventory: {
 		type: Number,
@@ -37,5 +37,9 @@ var schema = new mongoose.Schema({
 		default: false
 	}
 });
+
+// schema.pre('save', function(next){
+// 	this.categories.populate
+// })
 
 mongoose.model('Product', schema);
