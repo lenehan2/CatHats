@@ -47,6 +47,14 @@ app.factory('UserFactory', function($http, AuthService){
 				data: { password: newPass, requireNewPasswordOnLogin: false },
 			}).then(res => res.data)
 			.then(null, console.error.bind(console))
+		},
+
+		deleteUser: function (userId) {
+			console.log('deleting ', userId)
+			return $http({
+				method: 'DELETE',
+				url: '/api/admin/users/' + userId
+			});
 		}
 
 	}

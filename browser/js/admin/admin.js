@@ -34,7 +34,7 @@ app.config(function ($stateProvider) {
                 return UserFactory.fetchAll();
             }
         },
-        controller: function ($scope, users) {
+        controller: function ($scope, $state, users, UserFactory) {
             $scope.users = users;
         }
     });

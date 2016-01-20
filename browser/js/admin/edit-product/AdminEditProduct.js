@@ -25,4 +25,12 @@ app.controller('AdminEditProductCtrl', function ($scope, $state, product, Produc
                 $state.go('admin.products');
             });
     }
+
+    $scope.changedFeatured = function (product) {
+        var status = product.featured ? false : true;
+        ProductFactory.updateProduct(product._id, {
+            featured: status
+        })
+        .then(product => $scope.product = product);
+    }
 });
