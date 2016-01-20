@@ -10,7 +10,13 @@ var schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator: function (em) {
+                return /^\w+@\w+\.\w+$/.test(em);
+            },
+            message: '{VALUE} is not a valid email address'
+        }
     },
     password: {
         type: String,
