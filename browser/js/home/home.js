@@ -10,7 +10,7 @@ app.config(function ($stateProvider) {
                 return CategoryFactory.fetchAll();
             }
         },
-        controller: function($scope,featured){
+        controller: function($scope,featured, categories){
         	$scope.featured = featured;
             $scope.categories = categories;
             console.log($scope.categories);

@@ -2,7 +2,7 @@
     <div class="container">
         <h3>Browse in our Featured Categories!</h3>
         <div class="col-xs-12">
-            <div ng-repeat="category in categories">
+            <!-- <div ng-repeat="category in categories">
                 <a ui-sref="products({categories: category._id})">
                     <div class="col-xs-6 categoryBox">
                         <div class="col-xs-12">
@@ -11,10 +11,10 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
 
-            <!-- <a ui-sref="products({categories: '569f02ed6c707319397cb79f'})">
+            <a ui-sref="products({categories: categories[0]._id})">
                 <div class="col-xs-6 categoryBox">
                     <div class="col-xs-12">
                         <h4>Costumes</h4>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </a>
-            <a ui-sref="products({categories: '569f02ed6c707319397cb79e'})">
+            <a ui-sref="products({categories: categories[1]._id})">
                 <div class="col-xs-6 categoryBox">
                     <div class="col-xs-12">
                         <h4>Outerwear</h4>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </a>
-            <a ui-sref="products({categories: '569f02ed6c707319397cb7a0'})">
+            <a ui-sref="products({categories: categories[2]._id})">
                 <div class="col-xs-6 categoryBox">
                     <div class="col-xs-12">
                         <h4>Formal</h4>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </a>
-            <a ui-sref="products({categories: '569f02ed6c707319397cb7a1'})">
+            <a ui-sref="products({categories: categories[3]._id})">
                 <div class="col-xs-6 categoryBox">
                     <div class="col-xs-12">
                         <h4>Seasonal</h4>
@@ -46,7 +46,7 @@
                         <span class="glyphicon glyphicon-tint"></span>
                     </div>
                 </div>
-            </a> -->
+            </a>
         </div>
     </div>
     <div class="container">
