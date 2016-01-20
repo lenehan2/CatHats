@@ -13,7 +13,6 @@ app.config(function ($stateProvider) {
         controller: function($scope,featured, categories){
         	$scope.featured = featured;
             $scope.categories = categories;
-            console.log($scope.categories);
         }
     });
 });
