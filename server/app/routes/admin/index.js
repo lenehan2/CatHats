@@ -125,7 +125,7 @@ router.put('/orders/:orderId', function (req, res, next) {
 
 router.post('/categories', function (req, res, next) {
 	Category.create(req.body)
-		.then(category => res.json(product))
+		.then(category => res.json(category))
 		.then(null, next);
 });
 
