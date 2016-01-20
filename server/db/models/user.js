@@ -81,8 +81,6 @@ schema.methods.addToCart = function (newItems) {
 
     newItems.forEach(newItem => {
          var existing = this.cart.find(cartItem => {
-            console.log('cartItem: ',cartItem)
-            console.log('newItem: ',newItem)
 
             return cartItem.product.toString() === newItem.product.toString();
         });

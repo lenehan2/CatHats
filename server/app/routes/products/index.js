@@ -27,7 +27,6 @@ router.get('/', function (req, res, next) {
 
     Product.find(req.query).populate('categories')
         .then(products => {
-            console.log(products);
             return products;
         })
         .then(products => res.json(products))
